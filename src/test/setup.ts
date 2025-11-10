@@ -21,6 +21,10 @@ vi.stubGlobal('localStorage', {
   clear: vi.fn(),
 })
 
+// Mock CSS imports
+vi.mock('*.scss', () => ({}));
+vi.mock('*.css', () => ({}));
+
 // Don't mock document globally as it breaks testing-library
 // Instead, mock document.documentElement.setAttribute in specific tests if needed
 

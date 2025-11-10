@@ -2,8 +2,8 @@
 
 // Generate CSS custom properties for themes
 
-// Light theme (default)
-:root {
+// Light theme (default) - defined on html for better Storybook compatibility
+html {
   @include functions.generate-color-properties(light);
   @include functions.generate-spacing-properties();
   @include functions.generate-border-radius-properties();

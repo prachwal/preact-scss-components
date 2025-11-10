@@ -1,12 +1,12 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/preact'
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { render, screen, fireEvent, waitFor } from '@testing-library/preact';
 import { Container, getJustifyClass, getAlignClass, getWrapClass } from './Container';
 import * as responsiveUtils from '../../utils/responsive';
 
 describe('Container', () => {
   describe('Component Rendering', () => {
     it('renders with default props (no layout)', () => {
-      render(<Container>Content </Container>);
+      render(<Container>Content</Container>);
 
       const container = screen.getByTestId('container');
       expect(container).toBeInTheDocument();
@@ -16,7 +16,7 @@ describe('Container', () => {
     });
 
     it('renders with flex layout and row direction', () => {
-      render(<Container layout="flex" direction = "row" > Content </Container>);
+      render(<Container layout="flex" direction="row">Content</Container>);
 
       const container = screen.getByTestId('container');
       expect(container).toHaveClass('container', 'container--flex');
@@ -24,14 +24,14 @@ describe('Container', () => {
     });
 
     it('renders with flex layout and column direction', () => {
-      render(<Container layout="flex" direction = "column" > Content </Container>);
+      render(<Container layout="flex" direction="column">Content</Container>);
 
       const container = screen.getByTestId('container');
       expect(container).toHaveClass('container', 'container--flex', 'container--flex--column');
     });
 
     it('renders with grid layout', () => {
-      render(<Container layout="grid" > Content </Container>);
+      render(<Container layout="grid">Content</Container>);
 
       const container = screen.getByTestId('container');
       expect(container).toHaveClass('container', 'container--grid');
@@ -154,21 +154,21 @@ describe('Container', () => {
     });
 
     it('applies custom gap style', () => {
-      render(<Container gap="1rem" > Content </Container>);
+      render(<Container gap="1rem">Content</Container>);
 
       const container = screen.getByTestId('container');
       expect(container).toHaveStyle({ gap: '1rem' });
     });
 
     it('applies custom gap style with different values', () => {
-      render(<Container gap="0.5rem" > Content </Container>);
+      render(<Container gap="0.5rem">Content</Container>);
 
       const container = screen.getByTestId('container');
       expect(container).toHaveStyle({ gap: '0.5rem' });
     });
 
     it('applies custom className', () => {
-      render(<Container className="custom-class" > Content </Container>);
+      render(<Container className="custom-class">Content</Container>);
 
       const container = screen.getByTestId('container');
       expect(container).toHaveClass('container', 'custom-class');
@@ -177,9 +177,9 @@ describe('Container', () => {
     it('renders children correctly', () => {
       render(
         <Container>
-        <div>Child 1 </div>
-        <div>Child 2 </div>
-      </Container>
+          <div>Child 1</div>
+          <div>Child 2</div>
+        </Container>
       );
 
       expect(screen.getByText('Child 1')).toBeInTheDocument();
@@ -187,7 +187,7 @@ describe('Container', () => {
     });
 
     it('does not apply direction class for grid layout', () => {
-      render(<Container layout="grid" direction = "column" > Content </Container>);
+      render(<Container layout="grid" direction="column">Content</Container>);
 
       const container = screen.getByTestId('container');
       expect(container).toHaveClass('container', 'container--grid');
@@ -196,35 +196,35 @@ describe('Container', () => {
     });
 
     it('passes through additional props to the div element', () => {
-      render(<Container id="test-container" onClick = {() => {}}> Content </Container>);
+      render(<Container id="test-container" onClick={() => {}}>Content</Container>);
 
     const container = screen.getByTestId('container');
     expect(container).toHaveAttribute('id', 'test-container');
   });
 
   it('renders as section element when as="section"', () => {
-    render(<Container as="section" > Content </Container>);
+    render(<Container as="section">Content</Container>);
 
     const container = screen.getByTestId('container');
     expect(container?.tagName).toBe('SECTION');
   });
 
   it('renders as article element when as="article"', () => {
-    render(<Container as="article" > Content </Container>);
+    render(<Container as="article">Content</Container>);
 
     const container = screen.getByTestId('container');
     expect(container?.tagName).toBe('ARTICLE');
   });
 
   it('renders as main element when as="main"', () => {
-    render(<Container as="main" > Content </Container>);
+    render(<Container as="main">Content</Container>);
 
     const container = screen.getByTestId('container');
     expect(container?.tagName).toBe('MAIN');
   });
 
   it('renders as header element when as="header"', () => {
-    render(<Container as="header" > Content </Container>);
+    render(<Container as="header">Content</Container>);
 
     const container = screen.getByTestId('container');
     expect(container?.tagName).toBe('HEADER');
@@ -233,12 +233,12 @@ describe('Container', () => {
   it('combines layout, direction, gap, and custom className', () => {
     render(
       <Container
-          layout="flex"
-          direction = "column"
-          gap = "0.5rem"
-          className = "demo-flex-column"
+        layout="flex"
+        direction="column"
+        gap="0.5rem"
+        className="demo-flex-column"
       >
-      Content
+        Content
       </Container>
     );
 
@@ -250,11 +250,11 @@ describe('Container', () => {
   it('combines grid layout with gap and custom className', () => {
     render(
       <Container
-          layout="grid"
-          gap = "1rem"
-          className = "demo-grid"
+        layout="grid"
+        gap="1rem"
+        className="demo-grid"
       >
-      Content
+        Content
       </Container>
     );
 
@@ -265,7 +265,7 @@ describe('Container', () => {
   });
 
   it('passes through aria-label for accessibility', () => {
-    render(<Container aria-label="Test container" > Content </Container>);
+    render(<Container aria-label="Test container">Content</Container>);
 
     const container = screen.getByTestId('container');
     expect(container).toHaveAttribute('aria-label', 'Test container');

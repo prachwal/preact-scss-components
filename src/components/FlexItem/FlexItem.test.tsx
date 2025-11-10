@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/preact'
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/preact';
 import { FlexItem } from './FlexItem';
 
 describe('FlexItem', () => {

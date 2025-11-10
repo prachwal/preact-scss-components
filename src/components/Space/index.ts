@@ -1,0 +1,1 @@
+export { Space, type SpaceProps, default } from './Space';

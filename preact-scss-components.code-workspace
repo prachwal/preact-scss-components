@@ -15,7 +15,8 @@
     },
     "emmet.includeLanguages": {
       "typescript": "html"
-    }
+    },
+    "typescript.tsdk": "node_modules/typescript/lib"
   },
   "extensions": {
     "recommendations": [

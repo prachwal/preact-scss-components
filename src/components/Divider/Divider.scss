@@ -1,0 +1,47 @@
+.divider {
+  display: flex;
+  align-items: center;
+  margin: var(--psc-spacing-md) 0;
+  border: none;
+
+  &--vertical {
+    flex-direction: column;
+    margin: 0 var(--psc-spacing-md);
+    height: 100%;
+    width: 1px;
+  }
+
+  &--dashed {
+    .divider__line {
+      border-style: dashed;
+    }
+  }
+
+  &--with-title {
+    .divider__line {
+      flex: 1;
+    }
+
+    .divider__title {
+      margin: 0 var(--psc-spacing-md);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--psc-color-text-secondary, #6c757d);
+      white-space: nowrap;
+    }
+  }
+
+    &__line {
+    border-top: 1px solid var(--psc-color-border, #dee2e6);
+    border-left: none;
+    flex: 1;
+    height: 0;
+
+    .divider--vertical & {
+      border-top: none;
+      border-left: 1px solid var(--psc-color-border, #dee2e6);
+      width: 0;
+      height: 100%;
+    }
+  }
+}

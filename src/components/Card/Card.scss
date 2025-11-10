@@ -1,0 +1,138 @@
+@use "@styles/functions";
+
+// Card component styles with elevation system
+.card {
+  background-color: var(--psc-color-surface);
+  border-radius: var(--psc-border-radius-md);
+  box-sizing: border-box;
+  color: var(--psc-color-text-primary);
+  transition: box-shadow 0.2s ease-in-out;
+
+  // Elevation variants (0-24 levels)
+  @for $i from 0 through 24 {
+    &--elevation-#{$i} {
+      @if $i == 0 {
+        box-shadow: none;
+      } @else if $i <= 4 {
+        // Subtle shadows for low elevation
+        $alpha: 0.1 + ($i * 0.025);
+        box-shadow: 0 #{2px + ($i * 1px)} #{4px + ($i * 2px)} rgba(0, 0, 0, $alpha);
+      } @else if $i <= 12 {
+        // Medium shadows for mid elevation
+        $alpha: 0.1 + ($i * 0.025);
+        $alpha2: 0.05 + ($i * 0.015);
+        box-shadow:
+          0 #{2px + ($i * 1px)} #{4px + ($i * 2px)} rgba(0, 0, 0, $alpha),
+          0 #{1px + ($i * 0.5px)} #{2px + ($i * 1px)} rgba(0, 0, 0, $alpha2);
+      } @else {
+        // Strong shadows for high elevation
+        $alpha: 0.15 + (($i - 12) * 0.02);
+        $alpha2: 0.1 + (($i - 12) * 0.015);
+        $alpha3: 0.05 + (($i - 12) * 0.01);
+        box-shadow:
+          0 #{2px + ($i * 1px)} #{4px + ($i * 2px)} rgba(0, 0, 0, $alpha),
+          0 #{1px + ($i * 0.5px)} #{2px + ($i * 1px)} rgba(0, 0, 0, $alpha2),
+          0 #{0px} #{1px + (($i - 12) * 0.5px)} rgba(0, 0, 0, $alpha3);
+      }
+    }
+  }
+
+  // Variant styles
+  &--variant-outlined {
+    border: 1px solid var(--psc-color-border);
+    background-color: var(--psc-color-surface);
+
+    // Reduce shadow for outlined variant
+    @for $i from 1 through 24 {
+      &--elevation-#{$i} {
+        @if $i <= 4 {
+          $alpha: 0.05 + ($i * 0.015);
+          box-shadow: 0 #{1px + ($i * 0.5px)} #{2px + ($i * 1px)} rgba(0, 0, 0, $alpha);
+        } @else if $i <= 12 {
+          $alpha: 0.05 + ($i * 0.015);
+          $alpha2: 0.025 + ($i * 0.01);
+          box-shadow:
+            0 #{1px + ($i * 0.5px)} #{2px + ($i * 1px)} rgba(0, 0, 0, $alpha),
+            0 #{0.5px + ($i * 0.25px)} #{1px + ($i * 0.5px)} rgba(0, 0, 0, $alpha2);
+        } @else {
+          $alpha: 0.08 + (($i - 12) * 0.015);
+          $alpha2: 0.05 + (($i - 12) * 0.01);
+          $alpha3: 0.025 + (($i - 12) * 0.005);
+          box-shadow:
+            0 #{1px + ($i * 0.5px)} #{2px + ($i * 1px)} rgba(0, 0, 0, $alpha),
+            0 #{0.5px + ($i * 0.25px)} #{1px + ($i * 0.5px)} rgba(0, 0, 0, $alpha2),
+            0 #{0px} #{0.5px + (($i - 12) * 0.25px)} rgba(0, 0, 0, $alpha3);
+        }
+      }
+    }
+  }
+
+  &--variant-elevated {
+    border: none;
+  }
+
+  // Hover states for interactive cards
+  &:hover {
+    @for $i from 0 through 24 {
+      &--elevation-#{$i} {
+        @if $i < 24 {
+          // Increase elevation on hover (up to max of 24)
+          $hover-i: min($i + 2, 24);
+          @if $hover-i <= 4 {
+            $alpha: 0.1 + ($hover-i * 0.025);
+            box-shadow: 0 #{2px + ($hover-i * 1px)} #{4px + ($hover-i * 2px)} rgba(0, 0, 0, $alpha);
+          } @else if $hover-i <= 12 {
+            $alpha: 0.1 + ($hover-i * 0.025);
+            $alpha2: 0.05 + ($hover-i * 0.015);
+            box-shadow:
+              0 #{2px + ($hover-i * 1px)} #{4px + ($hover-i * 2px)} rgba(0, 0, 0, $alpha),
+              0 #{1px + ($hover-i * 0.5px)} #{2px + ($hover-i * 1px)} rgba(0, 0, 0, $alpha2);
+          } @else {
+            $alpha: 0.15 + (($hover-i - 12) * 0.02);
+            $alpha2: 0.1 + (($hover-i - 12) * 0.015);
+            $alpha3: 0.05 + (($hover-i - 12) * 0.01);
+            box-shadow:
+              0 #{2px + ($hover-i * 1px)} #{4px + ($hover-i * 2px)} rgba(0, 0, 0, $alpha),
+              0 #{1px + ($hover-i * 0.5px)} #{2px + ($hover-i * 1px)} rgba(0, 0, 0, $alpha2),
+              0 #{0px} #{1px + (($hover-i - 12) * 0.5px)} rgba(0, 0, 0, $alpha3);
+          }
+        }
+      }
+    }
+
+    // Special handling for outlined variant on hover
+    &--variant-outlined {
+      @for $i from 0 through 24 {
+        &--elevation-#{$i} {
+          @if $i < 24 {
+            $hover-i: min($i + 2, 24);
+            @if $hover-i <= 4 {
+              $alpha: 0.05 + ($hover-i * 0.015);
+              box-shadow: 0 #{1px + ($hover-i * 0.5px)} #{2px + ($hover-i * 1px)} rgba(0, 0, 0, $alpha);
+            } @else if $hover-i <= 12 {
+              $alpha: 0.05 + ($hover-i * 0.015);
+              $alpha2: 0.025 + ($hover-i * 0.01);
+              box-shadow:
+                0 #{1px + ($hover-i * 0.5px)} #{2px + ($hover-i * 1px)} rgba(0, 0, 0, $alpha),
+                0 #{0.5px + ($hover-i * 0.25px)} #{1px + ($hover-i * 0.5px)} rgba(0, 0, 0, $alpha2);
+            } @else {
+              $alpha: 0.08 + (($hover-i - 12) * 0.015);
+              $alpha2: 0.05 + (($hover-i - 12) * 0.01);
+              $alpha3: 0.025 + (($hover-i - 12) * 0.005);
+              box-shadow:
+                0 #{1px + ($hover-i * 0.5px)} #{2px + ($hover-i * 1px)} rgba(0, 0, 0, $alpha),
+                0 #{0.5px + ($hover-i * 0.25px)} #{1px + ($hover-i * 0.5px)} rgba(0, 0, 0, $alpha2),
+                0 #{0px} #{0.5px + (($hover-i - 12) * 0.25px)} rgba(0, 0, 0, $alpha3);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Focus states for accessibility
+  &:focus-visible {
+    outline: 2px solid var(--psc-color-primary);
+    outline-offset: 2px;
+  }
+}
