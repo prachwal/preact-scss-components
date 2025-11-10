@@ -7,8 +7,8 @@
   line-height: 1.5;
 
   // Set semantic colors for light theme
-  color: var(--color-text-primary);
-  background-color: var(--color-surface);
+  color: var(--psc-color-text-primary);
+  background-color: var(--psc-color-surface);
 
   // Responsive font sizes
   @media (max-width: 575px) {
@@ -16,14 +16,30 @@
   }
 }
 
+// Body - główny kontener aplikacji
 body {
   margin: 0;
   padding: 0;
   transition: background-color 0.2s ease, color 0.2s ease;
+  
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-sizing: border-box;
+  margin: 0;
+
+  @media (min-width: 576px) {
+    padding: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
 }
 
 // Global responsive utilities
-.container {
+.app-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;

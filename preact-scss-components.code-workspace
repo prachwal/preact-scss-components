@@ -1,0 +1,28 @@
+{
+  "folders": [
+    {
+      "name": "preact-scss-components",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "typescript.preferences.includePackageJsonAutoImports": "auto",
+    "files.associations": {
+      "*.test.tsx": "typescript",
+      "*.test.ts": "typescript",
+      "*.spec.tsx": "typescript",
+      "*.spec.ts": "typescript"
+    },
+    "emmet.includeLanguages": {
+      "typescript": "html"
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "vitest.explorer",
+      "ms-vscode.vscode-typescript-next",
+      "bradlc.vscode-tailwindcss",
+      "esbenp.prettier-vscode"
+    ]
+  }
+}

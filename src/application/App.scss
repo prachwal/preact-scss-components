@@ -1,0 +1,103 @@
+@use "@styles/variables" as *;
+
+// Main application styles
+.app {
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--psc-color-border);
+    background-color: var(--psc-color-surface);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+
+    &__title {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--psc-color-text-primary);
+    }
+
+    &__theme-button {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--psc-color-border);
+      border-radius: 4px;
+      background-color: var(--psc-color-primary);
+      color: var(--psc-color-white);
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &-main {
+    flex: 1;
+    padding: 2rem;
+  }
+
+  &-footer {
+    padding: 1rem;
+    border-top: 1px solid var(--psc-color-border);
+    background-color: var(--psc-color-surface);
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--psc-color-text-secondary);
+  }
+}
+
+// Demo styles for Container component
+.app-demo {
+  margin-top: 2rem;
+  
+  h2 {
+    margin-bottom: 1.5rem;
+    color: var(--psc-color-text-primary);
+  }
+  
+  h3 {
+    margin: 1.5rem 0 1rem 0;
+    color: var(--psc-color-text-primary);
+    font-size: 1.125rem;
+  }
+}
+
+.demo-item {
+  padding: 1rem;
+  background-color: var(--psc-color-surface);
+  border: 1px solid var(--psc-color-border);
+  border-radius: 4px;
+  color: var(--psc-color-text-primary);
+  text-align: center;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: var(--psc-color-primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.demo-flex {
+  margin-bottom: 2rem;
+}
+
+.demo-flex-column {
+  margin-bottom: 2rem;
+  max-width: 200px;
+}
+
+.demo-grid {
+  margin-bottom: 2rem;
+}

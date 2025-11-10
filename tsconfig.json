@@ -17,7 +17,17 @@
     "rootDir": "src",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false
+    "noEmit": false,
+    "paths": {
+      "@styles": ["./src/styles"],
+      "@styles/*": ["./src/styles/*"],
+      "@components": ["./src/components"],
+      "@components/*": ["./src/components/*"],
+      "@providers": ["./src/providers"],
+      "@providers/*": ["./src/providers/*"],
+      "@application": ["./src/application"],
+      "@application/*": ["./src/application/*"]
+    }
   },
   "include": [
     "src/**/*",

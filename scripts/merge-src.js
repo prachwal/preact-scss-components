@@ -12,7 +12,14 @@ const OUTPUT_FILE = process.argv[2] || 'merged-src-node.txt';
 
 console.log(`Scalanie plików z folderu ${SRC_DIR} do ${OUTPUT_FILE}...`);
 
-// Funkcja do rekursywnego przetwarzania plików
+/**
+ * Recursively processes a directory and merges all source files into a single string.
+ * Adds file separators and handles both files and subdirectories.
+ *
+ * @param {string} dirPath - Absolute path to the directory to process
+ * @param {string} relativePath - Relative path for file headers (used in recursion)
+ * @returns {string} Merged content of all files in the directory
+ */
 function processDirectory(dirPath, relativePath = '') {
     const items = fs.readdirSync(dirPath);
     let content = '';

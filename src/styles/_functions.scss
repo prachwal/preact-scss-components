@@ -68,20 +68,20 @@
   $theme-colors: map.get($colors, $theme);
 
   @each $key, $value in $theme-colors {
-    --color-#{"" + $key}: #{$value};
+    --psc-color-#{"" + $key}: #{$value};
   }
 }
 
 /// Generates CSS custom properties for spacing values.
 @mixin generate-spacing-properties() {
   @each $key, $value in $spacing-scale {
-    --spacing-#{$key}: #{$value};
+    --psc-spacing-#{$key}: #{$value};
   }
 }
 
 /// Generates CSS custom properties for border radius values.
 @mixin generate-border-radius-properties() {
   @each $key, $value in $border-radius-scale {
-    --border-radius-#{$key}: #{$value};
+    --psc-border-radius-#{$key}: #{$value};
   }
 }

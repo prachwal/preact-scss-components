@@ -4,12 +4,17 @@ import dts from 'vite-plugin-dts';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [preact(), dts()],
   resolve: {
     alias: {
-      '@styles': path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'src/styles'),
+      '@styles': path.resolve(__dirname, 'src/styles'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@providers': path.resolve(__dirname, 'src/providers'),
+      '@application': path.resolve(__dirname, 'src/application'),
     },
   },
   build: {

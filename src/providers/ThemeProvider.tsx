@@ -4,7 +4,10 @@ import { ComponentChildren } from 'preact';
 import '../styles/index.scss';
 import { getStoredTheme, injectThemeToHTML, setupSystemThemeListener, type Theme } from './theme-init';
 
-// Context dla motywów
+/**
+ * Context providing theme-related functionality to child components.
+ * Contains current theme state, theme switching functions, and loading status.
+ */
 export const ThemeContext = createContext<{
   theme: Theme;
   currentTheme: 'light' | 'dark';
@@ -40,7 +43,10 @@ const currentThemeSignal = computed(() => {
   return themeSignal.value;
 });
 
-// Funkcja do przełączania motywów
+/**
+ * Toggles the current theme in sequence: light → dark → system → light.
+ * Persists the new theme to localStorage.
+ */
 const toggleTheme = () => {
   const currentTheme = themeSignal.value;
   let nextTheme: Theme;
@@ -63,7 +69,12 @@ const toggleTheme = () => {
   }
 };
 
-// Funkcja do pobierania etykiety motywu
+/**
+ * Returns a human-readable label for the given theme.
+ *
+ * @param theme - The theme to get the label for
+ * @returns Localized theme label in Polish
+ */
 export const getThemeLabel = (theme: Theme): string => {
   switch (theme) {
     case 'light': return 'Jasny';
@@ -72,12 +83,21 @@ export const getThemeLabel = (theme: Theme): string => {
   }
 };
 
-// Funkcja do pobierania ikony motywu
+/**
+ * Returns an emoji icon representing the current theme state.
+ *
+ * @param currentTheme - The current active theme ('light' or 'dark')
+ * @returns Emoji icon for the theme
+ */
 export const getThemeIcon = (currentTheme: 'light' | 'dark'): string => {
   return currentTheme === 'dark' ? '🌙' : '☀️';
 };
 
-// Funkcja do inicjalizacji efektów po stronie klienta
+/**
+ * Initializes client-side effects for theme management.
+ * Sets up reactive effects for HTML attribute updates and system theme listeners.
+ * Safe to call multiple times - effects are idempotent.
+ */
 export function initializeClientSideEffects() {
   if (typeof window !== 'undefined') {
     // Effect do aktualizacji HTML data-theme przy zmianie motywu
@@ -87,17 +107,46 @@ export function initializeClientSideEffects() {
     });
 
     // Nasłuchiwanie zmian systemowych preferencji
-    setupSystemThemeListener(systemThemeSignal);
+    const cleanupSystemThemeListener = setupSystemThemeListener(systemThemeSignal);
+
+    // Store cleanup function for potential future use
+    // Note: In a real app, you might want to call this on unmount
+    // cleanupSystemThemeListener();
   }
 }
 
 // Inicjalizacja - tylko po stronie klienta
 initializeClientSideEffects();
 
+/**
+ * Props for the ThemeProvider component.
+ */
 interface ThemeProviderProps {
   children: ComponentChildren;
 }
 
+/**
+ * ThemeProvider component that provides theme context to child components.
+ * Manages theme state, persistence, and system theme synchronization.
+ * Must be placed high in the component tree to provide theme context to all components.
+ *
+ * @param props - Component props
+ * @param props.children - Child components that will have access to theme context
+ * @returns JSX element with theme context provider
+ *
+ * @example
+ * ```tsx
+ * import { ThemeProvider } from './Providers/ThemeProvider';
+ *
+ * function App() {
+ *   return (
+ *     <ThemeProvider>
+ *       <MyApp />
+ *     </ThemeProvider>
+ *   );
+ * }
+ * ```
+ */
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const value = {
     theme: themeSignal.value,

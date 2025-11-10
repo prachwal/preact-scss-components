@@ -1,0 +1,23 @@
+.container {
+  // Base container styles
+  width: 100%;
+  box-sizing: border-box;
+
+  // Flex layout variant
+  &--flex {
+    display: flex;
+    flex-direction: row; // Default direction
+
+    // Column direction modifier
+    &--column {
+      flex-direction: column;
+    }
+  }
+
+  // Grid layout variant
+  &--grid {
+    display: grid;
+    // Default grid template can be overridden by parent styles or additional props
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}

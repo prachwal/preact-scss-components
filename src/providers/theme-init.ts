@@ -1,9 +1,16 @@
 import { signal } from '@preact/signals';
 
-// Typy dla motywów
+/**
+ * Available theme options for the application
+ */
 export type Theme = 'light' | 'dark' | 'system';
 
-// Funkcja do synchronicznego odczytu theme z localStorage
+/**
+ * Retrieves the stored theme preference from localStorage.
+ * Falls back to 'system' if no valid theme is stored or in SSR environment.
+ *
+ * @returns The stored theme preference or 'system' as fallback
+ */
 export function getStoredTheme(): Theme {
   if (typeof window === 'undefined') return 'system';
 
@@ -19,7 +26,12 @@ export function getStoredTheme(): Theme {
   return 'system';
 }
 
-// Funkcja do synchronicznego ustawienia theme na HTML element
+/**
+ * Synchronously injects the theme into the HTML document by setting the data-theme attribute.
+ * This prevents FOUC (Flash of Unstyled Content) by applying the theme before rendering.
+ *
+ * @param theme - The theme to apply ('light', 'dark', or 'system')
+ */
 export function injectThemeToHTML(theme: Theme) {
   if (typeof window === 'undefined') return;
 
@@ -40,17 +52,31 @@ export function injectThemeToHTML(theme: Theme) {
   html.setAttribute('data-theme', currentTheme);
 }
 
-// Funkcja do inicjalizacji nasłuchiwania zmian systemowych preferencji
+/**
+ * Sets up a listener for system theme preference changes.
+ * Automatically updates the provided signal when the user changes their system theme preference.
+ *
+ * @param systemThemeSignal - The signal to update when system theme changes
+ */
 export function setupSystemThemeListener(systemThemeSignal: ReturnType<typeof signal<'light' | 'dark'>>) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') return () => {}; // Return no-op cleanup for SSR
 
   try {
     // Nasłuchiwanie zmian systemowych preferencji
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', (e) => {
+
+    const handleChange = (e: MediaQueryListEvent) => {
       systemThemeSignal.value = e.matches ? 'dark' : 'light';
-    });
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+
+    // Return cleanup function
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
   } catch (error) {
     console.warn('Failed to set up system theme listener:', error);
+    return () => {}; // Return no-op cleanup on error
   }
 }

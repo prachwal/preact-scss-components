@@ -2,7 +2,8 @@
   "name": "preact-scss-components",
   "version": "0.0.1",
   "description": "Components library for preact with scss support",
-  "main": "dist/index.js",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "style": "dist/index.css",
   "scripts": {
@@ -12,7 +13,9 @@
     "test": "vitest --run",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "merge-src": "node scripts/merge-src.js",
+    "prepublishOnly": "./scripts/check-version.sh"
   },
   "keywords": [
     "preact",
@@ -22,7 +25,24 @@
   ],
   "author": "Przemyslaw Rachwal",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prachwal/preact-scss-components.git"
+  },
+  "homepage": "https://github.com/prachwal/preact-scss-components#readme",
+  "bugs": {
+    "url": "https://github.com/prachwal/preact-scss-components/issues"
+  },
   "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    },
+    "./style": "./dist/index.css"
+  },
   "files": [
     "dist"
   ],
