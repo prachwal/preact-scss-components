@@ -1,97 +1,263 @@
 @use "@styles/variables" as *;
+@use "@styles/spacing" as *;
 
-// Main application styles
+// Main application styles - Mobile First
 .app {
-
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--psc-color-surface);
 
   &-header {
-    padding: 1rem;
+    padding: var(--psc-spacing-sm) var(--psc-spacing-md);
     border-bottom: 1px solid var(--psc-color-border);
     background-color: var(--psc-color-surface);
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: all 0.2s ease;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+    // Tablet and up
+    @include respond-to(md) {
+      padding: var(--psc-spacing-md) var(--psc-spacing-lg);
+    }
+
+    // Desktop and up
+    @include respond-to(lg) {
+      padding: var(--psc-spacing-md) var(--psc-spacing-2xl);
+    }
 
     &__title {
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 1.125rem;
       color: var(--psc-color-text-primary);
+      font-weight: 700;
+
+      // Tablet and up
+      @include respond-to(md) {
+        font-size: 1.5rem;
+      }
+
+      // Desktop and up
+      @include respond-to(lg) {
+        font-size: 1.75rem;
+      }
+    }
+
+    &__theme-info {
+      display: none;
+      
+      // Tablet and up
+      @include respond-to(md) {
+        display: inline-block;
+        font-size: 0.875rem;
+        color: var(--psc-color-text-secondary);
+      }
     }
 
     &__theme-button {
-      padding: 0.5rem 1rem;
+      padding: var(--psc-spacing-sm) var(--psc-spacing-md);
       border: 1px solid var(--psc-color-border);
-      border-radius: 4px;
+      border-radius: var(--psc-border-radius-md);
       background-color: var(--psc-color-primary);
       color: var(--psc-color-white);
       cursor: pointer;
       font-size: 0.875rem;
       transition: all 0.2s ease;
+      white-space: nowrap;
+
+      // Desktop and up
+      @include respond-to(lg) {
+        padding: var(--psc-spacing-sm) var(--psc-spacing-lg);
+        font-size: 1rem;
+      }
 
       &:hover {
         opacity: 0.9;
         transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
       }
 
       &:active {
         transform: translateY(0);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--psc-color-primary);
+        outline-offset: 2px;
       }
     }
   }
 
   &-main {
     flex: 1;
-    padding: 2rem;
+    padding: var(--psc-spacing-md);
+    max-width: 100%;
+    overflow-x: hidden;
+
+    // Tablet and up
+    @include respond-to(md) {
+      padding: var(--psc-spacing-lg) var(--psc-spacing-xl);
+    }
+
+    // Desktop and up
+    @include respond-to(lg) {
+      padding: var(--psc-spacing-xl) var(--psc-spacing-2xl);
+    }
+  }
+
+  &-hero {
+    margin-bottom: var(--psc-spacing-xl);
+    padding: var(--psc-spacing-lg) 0;
+
+    // Tablet and up
+    @include respond-to(md) {
+      margin-bottom: var(--psc-spacing-2xl);
+      padding: var(--psc-spacing-2xl) 0;
+    }
+
+    // Desktop and up
+    @include respond-to(lg) {
+      margin-bottom: var(--psc-spacing-3xl);
+      padding: var(--psc-spacing-3xl) 0;
+    }
+  }
+
+  &-section {
+    margin-bottom: var(--psc-spacing-2xl);
+    padding: var(--psc-spacing-lg);
+    background-color: var(--psc-color-surface-secondary);
+    border-radius: var(--psc-border-radius-lg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+    // Tablet and up
+    @include respond-to(md) {
+      margin-bottom: var(--psc-spacing-3xl);
+      padding: var(--psc-spacing-xl);
+    }
+
+    // Desktop and up
+    @include respond-to(lg) {
+      padding: var(--psc-spacing-2xl);
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: var(--psc-spacing-md);
+      font-size: 1.5rem;
+      color: var(--psc-color-text-primary);
+
+      // Tablet and up
+      @include respond-to(md) {
+        font-size: 1.875rem;
+        margin-bottom: var(--psc-spacing-lg);
+      }
+    }
+
+    p {
+      margin-bottom: var(--psc-spacing-lg);
+      color: var(--psc-color-text-secondary);
+      line-height: 1.6;
+      font-size: 0.875rem;
+
+      // Tablet and up
+      @include respond-to(md) {
+        font-size: 1rem;
+      }
+    }
   }
 
   &-footer {
-    padding: 1rem;
+    padding: var(--psc-spacing-md);
     border-top: 1px solid var(--psc-color-border);
     background-color: var(--psc-color-surface);
     text-align: center;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     color: var(--psc-color-text-secondary);
+
+    // Tablet and up
+    @include respond-to(md) {
+      padding: var(--psc-spacing-lg);
+      font-size: 0.875rem;
+    }
+
+    // Desktop and up
+    @include respond-to(lg) {
+      padding: var(--psc-spacing-xl) var(--psc-spacing-2xl);
+    }
   }
 }
 
-// Demo styles for Container component
-.app-demo {
-  margin-top: 2rem;
-  
-  h2 {
-    margin-bottom: 1.5rem;
-    color: var(--psc-color-text-primary);
-  }
-  
-  h3 {
-    margin: 1.5rem 0 1rem 0;
-    color: var(--psc-color-text-primary);
-    font-size: 1.125rem;
-  }
-}
-
-.demo-item {
-  padding: 1rem;
+// Demo section styles - Mobile First
+.demo-section {
+  margin-bottom: var(--psc-spacing-xl);
+  padding: var(--psc-spacing-md);
   background-color: var(--psc-color-surface);
   border: 1px solid var(--psc-color-border);
-  border-radius: 4px;
+  border-radius: var(--psc-border-radius-lg);
+
+  // Tablet and up
+  @include respond-to(md) {
+    margin-bottom: var(--psc-spacing-2xl);
+    padding: var(--psc-spacing-lg);
+  }
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: var(--psc-spacing-md);
+    font-size: 1.125rem;
+    color: var(--psc-color-text-primary);
+    font-weight: 600;
+
+    // Tablet and up
+    @include respond-to(md) {
+      font-size: 1.25rem;
+      margin-bottom: var(--psc-spacing-lg);
+    }
+  }
+}
+
+// Demo item base styles - Mobile First
+.demo-item {
+  padding: var(--psc-spacing-sm);
+  background-color: var(--psc-color-surface);
+  border: 1px solid var(--psc-color-border);
+  border-radius: var(--psc-border-radius-md);
   color: var(--psc-color-text-primary);
   text-align: center;
   transition: all 0.2s ease;
   font-weight: 500;
-  min-height: 60px;
+  min-height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 0.875rem;
+  word-wrap: break-word;
+  
+  // Tablet and up
+  @include respond-to(md) {
+    padding: var(--psc-spacing-md);
+    min-height: 60px;
+    font-size: 1rem;
+  }
+
+  // Desktop and up
+  @include respond-to(lg) {
+    padding: var(--psc-spacing-lg);
+  }
   
   &:hover {
     border-color: var(--psc-color-primary);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 }
 
@@ -100,6 +266,10 @@
   background-color: var(--psc-color-primary);
   color: var(--psc-color-white);
   border-color: var(--psc-color-primary);
+  
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+  }
 }
 
 .demo-item--secondary {
@@ -137,27 +307,42 @@
   border-color: var(--psc-color-border-hover);
 }
 
+// Size variants - Mobile First
 .demo-item--large {
-  padding: 1.5rem;
-  min-height: 80px;
-  font-size: 1.1rem;
+  padding: var(--psc-spacing-md);
+  min-height: 70px;
+  font-size: 1rem;
+
+  // Tablet and up
+  @include respond-to(md) {
+    padding: var(--psc-spacing-lg);
+    min-height: 80px;
+    font-size: 1.125rem;
+  }
 }
 
 .demo-item--small {
-  padding: 0.75rem;
-  min-height: 50px;
-  font-size: 0.9rem;
+  padding: var(--psc-spacing-xs) var(--psc-spacing-sm);
+  min-height: 40px;
+  font-size: 0.75rem;
+
+  // Tablet and up
+  @include respond-to(md) {
+    padding: var(--psc-spacing-sm);
+    min-height: 50px;
+    font-size: 0.875rem;
+  }
 }
 
-.demo-flex {
-  margin-bottom: 2rem;
-}
+// Layout helpers
+.demo-justify,
+.demo-align,
+.demo-wrap,
+.demo-gap {
+  margin-bottom: var(--psc-spacing-md);
 
-.demo-flex-column {
-  margin-bottom: 2rem;
-  max-width: 200px;
-}
-
-.demo-grid {
-  margin-bottom: 2rem;
+  // Tablet and up
+  @include respond-to(md) {
+    margin-bottom: var(--psc-spacing-lg);
+  }
 }

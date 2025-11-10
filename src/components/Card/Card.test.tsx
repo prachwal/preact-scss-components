@@ -102,65 +102,141 @@ describe('Card', () => {
 
       expect(card).toHaveStyle({ padding: 'var(--psc-spacing-md)' });
     });
-  });
 
-  describe('styling combinations', () => {
-    it('combines elevation, variant, and padding correctly', () => {
-      render(
-        <Card
-          elevation={4}
-          variant="outlined"
-          padding="lg"
-          className="test-class"
-        >
-          Content
-        </Card>
-      );
+    it('applies 2xl padding', () => {
+      render(<Card padding="2xl">Content</Card>);
       const card = screen.getByText('Content');
 
-      expect(card).toHaveClass('card');
-      expect(card).toHaveClass('card--elevation-4');
-      expect(card).toHaveClass('card--variant-outlined');
-      expect(card).toHaveClass('test-class');
-      expect(card).toHaveStyle({ padding: 'var(--psc-spacing-lg)' });
+      expect(card).toHaveStyle({ padding: 'var(--psc-spacing-2xl)' });
     });
 
-    it('preserves custom styles', () => {
-      render(
-        <Card style={{ margin: '10px', backgroundColor: 'red' }}>
-          Content
-        </Card>
-      );
+    it('applies 3xl padding', () => {
+      render(<Card padding="3xl">Content</Card>);
       const card = screen.getByText('Content');
 
-      expect(card.style.margin).toBe('10px');
+      expect(card).toHaveStyle({ padding: 'var(--psc-spacing-3xl)' });
+    });
+
+    it('applies 4xl padding', () => {
+      render(<Card padding="4xl">Content</Card>);
+      const card = screen.getByText('Content');
+
+      expect(card).toHaveStyle({ padding: 'var(--psc-spacing-4xl)' });
+    });
+
+    it('applies 5xl padding', () => {
+      render(<Card padding="5xl">Content</Card>);
+      const card = screen.getByText('Content');
+
+      expect(card).toHaveStyle({ padding: 'var(--psc-spacing-5xl)' });
+    });
+
+    it('applies 6xl padding', () => {
+      render(<Card padding="6xl">Content</Card>);
+      const card = screen.getByText('Content');
+
+      expect(card).toHaveStyle({ padding: 'var(--psc-spacing-6xl)' });
+    });
+  });
+
+  describe('style prop', () => {
+    it('merges custom styles with computed styles', () => {
+      const { container } = render(<Card style={{ backgroundColor: 'red' }}>Content</Card>);
+      const card = container.firstChild as HTMLElement;
+
       expect(card.style.backgroundColor).toBe('red');
+      expect(card.style.padding).toBe('var(--psc-spacing-md)');
+    });
+
+    it('handles empty style object', () => {
+      const { container } = render(<Card style={{}}>Content</Card>);
+      const card = container.firstChild as HTMLElement;
+
+      expect(card.style.padding).toBe('var(--psc-spacing-md)');
+    });
+
+    it('handles null style', () => {
+      const { container } = render(<Card style={null as any}>Content</Card>);
+      const card = container.firstChild as HTMLElement;
+
       expect(card.style.padding).toBe('var(--psc-spacing-md)');
     });
   });
 
-  describe('accessibility', () => {
-    it('supports focus-visible for keyboard navigation', () => {
-      render(<Card tabIndex={0}>Content</Card>);
-      const card = screen.getByText('Content');
-
-      expect(card).toHaveAttribute('tabIndex', '0');
-    });
-
-    it('passes through other HTML attributes', () => {
-      render(
+  describe('combined props', () => {
+    it('applies all props together', () => {
+      const { container } = render(
         <Card
-          role="region"
-          aria-label="Test card"
-          data-testid="card"
+          elevation={8}
+          variant="outlined"
+          padding="xl"
+          as="article"
+          className="custom-card"
+          style={{ backgroundColor: 'blue' }}
         >
           Content
         </Card>
       );
-      const card = screen.getByTestId('card');
+      const card = container.firstChild as HTMLElement;
 
-      expect(card).toHaveAttribute('role', 'region');
-      expect(card).toHaveAttribute('aria-label', 'Test card');
+      expect(card?.tagName).toBe('ARTICLE');
+      expect(card).toHaveClass('card');
+      expect(card).toHaveClass('card--elevation-8');
+      expect(card).toHaveClass('card--variant-outlined');
+      expect(card).toHaveClass('custom-card');
+      expect(card.style.padding).toBe('var(--psc-spacing-xl)');
+      expect(card.style.backgroundColor).toBe('blue');
+    });
+  });
+
+  describe('HTML attributes', () => {
+    it('forwards additional props', () => {
+      render(
+        <Card data-testid="card-element" aria-label="Card container">
+          Content
+        </Card>
+      );
+      const card = screen.getByText('Content');
+
+      expect(card.getAttribute('data-testid')).toBe('card-element');
+      expect(card.getAttribute('aria-label')).toBe('Card container');
+    });
+  });
+
+  describe('semantic HTML tags', () => {
+    it('renders as section', () => {
+      render(<Card as="section">Content</Card>);
+      const card = screen.getByText('Content');
+
+      expect(card?.tagName).toBe('SECTION');
+    });
+
+    it('renders as header', () => {
+      render(<Card as="header">Content</Card>);
+      const card = screen.getByText('Content');
+
+      expect(card?.tagName).toBe('HEADER');
+    });
+
+    it('renders as main', () => {
+      render(<Card as="main">Content</Card>);
+      const card = screen.getByText('Content');
+
+      expect(card?.tagName).toBe('MAIN');
+    });
+
+    it('renders as aside', () => {
+      render(<Card as="aside">Content</Card>);
+      const card = screen.getByText('Content');
+
+      expect(card?.tagName).toBe('ASIDE');
+    });
+
+    it('renders as footer', () => {
+      render(<Card as="footer">Content</Card>);
+      const card = screen.getByText('Content');
+
+      expect(card?.tagName).toBe('FOOTER');
     });
   });
 });

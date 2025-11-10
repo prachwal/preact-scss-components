@@ -46,3 +46,59 @@ $border-radius-scale: (
 
 // Default border radius
 $border-radius: map.get($border-radius-scale, md);
+
+// Mobile-first responsive mixins
+/// Media query mixin for mobile-first responsive design
+/// @param {String} $breakpoint - The breakpoint key (xs, sm, md, lg, xl, 2xl)
+@mixin respond-to($breakpoint) {
+  $min-width: map.get($breakpoints, $breakpoint);
+  
+  @if $min-width and $min-width > 0 {
+    @media (min-width: $min-width) {
+      @content;
+    }
+  } @else {
+    // For xs (0px), apply styles directly without media query
+    @content;
+  }
+}
+
+/// Generate responsive utilities for a property
+/// @param {String} $property - CSS property name
+/// @param {Map} $values - Map of breakpoint to value
+@mixin responsive-property($property, $values) {
+  @each $breakpoint, $value in $values {
+    @if $breakpoint == xs {
+      #{$property}: $value;
+    } @else {
+      @include respond-to($breakpoint) {
+        #{$property}: $value;
+      }
+    }
+  }
+}
+
+/// Container max-width responsive mixin
+@mixin container-max-widths() {
+  max-width: 100%;
+  
+  @include respond-to(sm) {
+    max-width: 540px;
+  }
+  
+  @include respond-to(md) {
+    max-width: 720px;
+  }
+  
+  @include respond-to(lg) {
+    max-width: 960px;
+  }
+  
+  @include respond-to(xl) {
+    max-width: 1140px;
+  }
+  
+  @include respond-to(2xl) {
+    max-width: 1320px;
+  }
+}

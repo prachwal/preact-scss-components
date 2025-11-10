@@ -1,18 +1,33 @@
 import { useContext } from 'preact/hooks';
 import { ThemeContext } from '@providers';
-import { Container, Grid, getThemeIcon, getThemeLabel } from '@components';
+import { 
+  Container, 
+  Grid, 
+  Card, 
+  Stack, 
+  Space, 
+  Divider,
+  Layout,
+  Header,
+  Content,
+  Footer,
+  getThemeIcon, 
+  getThemeLabel 
+} from '@components';
 import { ExampleComponent } from './ExampleComponent';
 
 import './App.scss';
 
 /**
- * Main application component that renders the demo interface for Preact SCSS components.
+ * Main application component that renders a comprehensive demo of all Preact SCSS components.
+ * 
+ * This component demonstrates:
+ * - Responsive design with mobile-first approach
+ * - Complete component library showcase
+ * - Theme switching (light/dark/system)
+ * - Layout patterns and best practices
  *
- * This component uses the ThemeContext to manage theme state and provides a comprehensive
- * demo showcasing all component capabilities including responsive design, theming, and layout options.
- *
- * @returns JSX element containing the main app structure with header and content areas,
- *          or a loading indicator if theme context is not available
+ * @returns JSX element containing the main app structure
  */
 export function App() {
   const themeContext = useContext(ThemeContext);
@@ -25,21 +40,21 @@ export function App() {
 
   return (
     <Container className="app">
-      {/* Header with theme toggle */}
+      {/* Header with Theme Toggle */}
       <Container as="header" className="app-header">
         <Container layout="flex" justifyContent="space-between" alignItems="center" gap="1rem">
           <h1 className="app-header__title">
-            🎨 Preact SCSS Components Demo
+            🎨 Preact SCSS Components
           </h1>
           <Container layout="flex" gap="1rem" alignItems="center">
             <span className="app-header__theme-info">
-              Motyw: {getThemeLabel(theme)} ({getThemeIcon(currentTheme)})
+              {getThemeLabel(theme)} ({getThemeIcon(currentTheme)})
             </span>
             <button
               type="button"
               className="app-header__theme-button"
               onClick={toggleTheme}
-              aria-label={`Przełącz na ${theme === 'light' ? 'ciemny' : theme === 'dark' ? 'systemowy' : 'jasny'} motyw`}
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light'} theme`}
             >
               {theme === 'light' ? '🌙' : theme === 'dark' ? '⚙️' : '☀️'}
             </button>
@@ -47,493 +62,286 @@ export function App() {
         </Container>
       </Container>
 
+      {/* Main Content */}
       <Container as="main" className="app-main">
         {/* Hero Section */}
-        <Container as="section" className="app-hero">
-          <Container layout="flex" direction="column" alignItems="center" gap="2rem" style={{ textAlign: 'center', padding: '3rem 1rem' }}>
-            <h2 style={{ fontSize: '2.5rem', margin: 0 }}>Komponenty Preact + SCSS</h2>
-            <p style={{ fontSize: '1.2rem', opacity: 0.8, maxWidth: '600px', margin: 0 }}>
-              Kompleksowa biblioteka komponentów UI z wsparciem dla responsywności, motywów i nowoczesnych layoutów.
+        <section className="app-hero">
+          <Stack direction="column" alignItems="center" spacing="xl">
+            <h2 style={{ fontSize: 'clamp(1.75rem, 5vw, 2.5rem)', margin: 0, textAlign: 'center' }}>
+              Modern Component Library
+            </h2>
+            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', opacity: 0.8, maxWidth: '600px', textAlign: 'center', margin: 0 }}>
+              Responsive, accessible, and themeable components built with Preact and SCSS.
             </p>
-            <Container layout="flex" gap="1rem" wrap="wrap" justifyContent="center">
-              <div className="demo-item demo-item--primary demo-item--large">🚀 Responsywne</div>
-              <div className="demo-item demo-item--secondary demo-item--large">🎨 Motywy</div>
-              <div className="demo-item demo-item--success demo-item--large">📱 Mobile-first</div>
-              <div className="demo-item demo-item--warning demo-item--large">⚡ Wydajne</div>
+            <Space size="medium" wrap>
+              <div className="demo-item demo-item--primary">🚀 Responsive</div>
+              <div className="demo-item demo-item--secondary">🎨 Themeable</div>
+              <div className="demo-item demo-item--success">📱 Mobile-First</div>
+              <div className="demo-item demo-item--info">⚡ Lightweight</div>
+            </Space>
+          </Stack>
+        </section>
+
+        {/* Layout Component Demo */}
+        <section className="app-section">
+          <h2>🏗️ Layout System</h2>
+          <p>Structural components for building page layouts.</p>
+          
+          <Layout style={{ minHeight: '300px', border: '1px solid var(--psc-color-border)' }}>
+            <Header style={{ padding: '1rem', backgroundColor: 'var(--psc-color-primary)', color: 'white' }}>
+              <strong>Header</strong>
+            </Header>
+            <Content style={{ padding: '1rem' }}>
+              <div className="demo-item">Main Content Area</div>
+            </Content>
+            <Footer style={{ padding: '1rem', backgroundColor: 'var(--psc-color-surface-secondary)' }}>
+              <strong>Footer</strong>
+            </Footer>
+          </Layout>
+        </section>
+
+        {/* Grid System Demo */}
+        <section className="app-section">
+          <h2>📐 Grid System</h2>
+          <p>12-column responsive grid with breakpoint support.</p>
+          
+          <div className="demo-section">
+            <h3>Responsive Columns</h3>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6} md={4} lg={3}>
+                <Card elevation={2} padding="md">
+                  <div style={{ textAlign: 'center' }}>xs=12, sm=6, md=4, lg=3</div>
+                </Card>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={3}>
+                <Card elevation={2} padding="md">
+                  <div style={{ textAlign: 'center' }}>xs=12, sm=6, md=4, lg=3</div>
+                </Card>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={3}>
+                <Card elevation={2} padding="md">
+                  <div style={{ textAlign: 'center' }}>xs=12, sm=6, md=4, lg=3</div>
+                </Card>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={3}>
+                <Card elevation={2} padding="md">
+                  <div style={{ textAlign: 'center' }}>xs=12, sm=6, md=4, lg=3</div>
+                </Card>
+              </Grid>
+            </Grid>
+          </div>
+        </section>
+
+        {/* Card Component Demo */}
+        <section className="app-section">
+          <h2>🃏 Card Component</h2>
+          <p>Versatile content containers with elevation and variants.</p>
+          
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6} md={4}>
+              <Card elevation={1} padding="lg">
+                <h3 style={{ marginTop: 0 }}>Low Elevation</h3>
+                <p>Subtle shadow for minimal depth.</p>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Card elevation={8} padding="lg">
+                <h3 style={{ marginTop: 0 }}>Medium Elevation</h3>
+                <p>Moderate shadow for emphasis.</p>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Card elevation={16} padding="lg">
+                <h3 style={{ marginTop: 0 }}>High Elevation</h3>
+                <p>Strong shadow for prominence.</p>
+              </Card>
+            </Grid>
+          </Grid>
+        </section>
+
+        {/* Stack Component Demo */}
+        <section className="app-section">
+          <h2>📚 Stack Component</h2>
+          <p>Flexbox container with consistent spacing.</p>
+          
+          <div className="demo-section">
+            <h3>Vertical Stack</h3>
+            <Stack direction="column" spacing="md">
+              <div className="demo-item demo-item--primary">Stack Item 1</div>
+              <div className="demo-item demo-item--secondary">Stack Item 2</div>
+              <div className="demo-item demo-item--success">Stack Item 3</div>
+            </Stack>
+          </div>
+
+          <div className="demo-section">
+            <h3>Horizontal Stack</h3>
+            <Stack direction="row" spacing="lg">
+              <div className="demo-item demo-item--info">Item A</div>
+              <div className="demo-item demo-item--warning">Item B</div>
+              <div className="demo-item demo-item--error">Item C</div>
+            </Stack>
+          </div>
+        </section>
+
+        {/* Space Component Demo */}
+        <section className="app-section">
+          <h2>↔️ Space Component</h2>
+          <p>Add spacing between inline elements.</p>
+          
+          <div className="demo-section">
+            <h3>Horizontal Spacing</h3>
+            <Space size="medium">
+              <button style={{ padding: '0.5rem 1rem', backgroundColor: 'var(--psc-color-primary)', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+                Button 1
+              </button>
+              <button style={{ padding: '0.5rem 1rem', backgroundColor: 'var(--psc-color-secondary)', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+                Button 2
+              </button>
+              <button style={{ padding: '0.5rem 1rem', backgroundColor: 'var(--psc-color-success)', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+                Button 3
+              </button>
+            </Space>
+          </div>
+        </section>
+
+        {/* Divider Component Demo */}
+        <section className="app-section">
+          <h2>➖ Divider Component</h2>
+          <p>Visual separators for content sections.</p>
+          
+          <div className="demo-section">
+            <div className="demo-item demo-item--small">Content Above</div>
+            <Divider />
+            <div className="demo-item demo-item--small">Content Below</div>
+          </div>
+
+          <div className="demo-section">
+            <Divider title="Section Title" />
+          </div>
+
+          <div className="demo-section">
+            <Stack direction="row" spacing="md" alignItems="center">
+              <div className="demo-item demo-item--small">Left</div>
+              <Divider orientation="vertical" />
+              <div className="demo-item demo-item--small">Right</div>
+            </Stack>
+          </div>
+        </section>
+
+        {/* Container Component Demo */}
+        <section className="app-section">
+          <h2>📦 Container Component</h2>
+          <p>Versatile layout container with flex and grid support.</p>
+          
+          <div className="demo-section">
+            <h3>Flex Container - Row</h3>
+            <Container layout="flex" gap="md" justifyContent="space-between">
+              <div className="demo-item demo-item--primary">Flex Start</div>
+              <div className="demo-item demo-item--secondary">Center</div>
+              <div className="demo-item demo-item--success">Flex End</div>
             </Container>
-          </Container>
-        </Container>
+          </div>
+
+          <div className="demo-section">
+            <h3>Grid Container</h3>
+            <Container layout="grid" gap="lg">
+              <div className="demo-item demo-item--info">Grid 1</div>
+              <div className="demo-item demo-item--warning">Grid 2</div>
+              <div className="demo-item demo-item--error">Grid 3</div>
+              <div className="demo-item demo-item--primary">Grid 4</div>
+            </Container>
+          </div>
+        </section>
 
         {/* Example Component Demo */}
-        <Container as="section" className="app-section">
-          <h2>🧩 ExampleComponent</h2>
-          <p>Podstawowy komponent demonstracyjny z interaktywnymi funkcjami.</p>
+        <section className="app-section">
+          <h2>🧩 Interactive Example</h2>
+          <p>A demonstration component with stateful interactions.</p>
           <ExampleComponent />
-        </Container>
+        </section>
 
-        {/* Container Component Showcase */}
-        <Container as="section" className="app-section">
-          <h2>📦 Container Component</h2>
-          <p>Wszechstronny komponent layout z wsparciem dla Flexbox i Grid.</p>
-
-          <Container as="article" className="demo-section">
-            <h3>🎯 Flex Layout - Kierunki</h3>
-            <Container layout="flex" direction="row" gap="1rem" className="demo-flex" style={{ marginBottom: '1rem' }}>
-              <div className="demo-item demo-item--primary">Row 1</div>
-              <div className="demo-item demo-item--primary">Row 2</div>
-              <div className="demo-item demo-item--primary">Row 3</div>
-            </Container>
-            <Container layout="flex" direction="column" gap="0.5rem" className="demo-flex-column" style={{ maxWidth: '200px' }}>
-              <div className="demo-item demo-item--secondary">Column 1</div>
-              <div className="demo-item demo-item--secondary">Column 2</div>
-              <div className="demo-item demo-item--secondary">Column 3</div>
-            </Container>
-          </Container>
-
-          <Container as="article" className="demo-section">
-            <h3>⚖️ Justify Content</h3>
-            <Container layout="flex" gap="0.5rem" justifyContent="flex-start" className="demo-justify">
-              <div className="demo-item demo-item--small">Start</div>
-              <div className="demo-item demo-item--small">Start</div>
-              <div className="demo-item demo-item--small">Start</div>
-            </Container>
-            <Container layout="flex" gap="0.5rem" justifyContent="center" className="demo-justify">
-              <div className="demo-item demo-item--small demo-item--success">Center</div>
-              <div className="demo-item demo-item--small demo-item--success">Center</div>
-            </Container>
-            <Container layout="flex" gap="0.5rem" justifyContent="space-between" className="demo-justify">
-              <div className="demo-item demo-item--small demo-item--warning">Between</div>
-              <div className="demo-item demo-item--small demo-item--warning">Between</div>
-            </Container>
-            <Container layout="flex" gap="0.5rem" justifyContent="space-around" className="demo-justify">
-              <div className="demo-item demo-item--small demo-item--info">Around</div>
-              <div className="demo-item demo-item--small demo-item--info">Around</div>
-            </Container>
-          </Container>
-
-          <Container as="article" className="demo-section">
-            <h3>📏 Align Items</h3>
-            <Container layout="flex" gap="0.5rem" alignItems="flex-start" style={{ height: '80px' }} className="demo-align">
-              <div className="demo-item demo-item--small">Start</div>
-              <div className="demo-item demo-item--small">Start</div>
-              <div className="demo-item demo-item--small">Start</div>
-            </Container>
-            <Container layout="flex" gap="0.5rem" alignItems="center" style={{ height: '80px' }} className="demo-align">
-              <div className="demo-item demo-item--small demo-item--primary">Center</div>
-              <div className="demo-item demo-item--small demo-item--primary">Center</div>
-            </Container>
-            <Container layout="flex" gap="0.5rem" alignItems="flex-end" style={{ height: '80px' }} className="demo-align">
-              <div className="demo-item demo-item--small demo-item--secondary">End</div>
-              <div className="demo-item demo-item--small demo-item--secondary">End</div>
-            </Container>
-            <Container layout="flex" gap="0.5rem" alignItems="stretch" style={{ height: '80px' }} className="demo-align">
-              <div className="demo-item demo-item--small demo-item--error">Stretch</div>
-              <div className="demo-item demo-item--small demo-item--error">Stretch</div>
-            </Container>
-          </Container>
-
-          <Container as="article" className="demo-section">
-            <h3>🔄 Wrap Options</h3>
-            <Container layout="flex" gap="0.5rem" wrap="wrap" style={{ maxWidth: '300px' }} className="demo-wrap">
-              <div className="demo-item demo-item--small demo-item--info">Wrap 1</div>
-              <div className="demo-item demo-item--small demo-item--info">Wrap 2</div>
-              <div className="demo-item demo-item--small demo-item--info">Wrap 3</div>
-              <div className="demo-item demo-item--small demo-item--info">Wrap 4</div>
-              <div className="demo-item demo-item--small demo-item--info">Wrap 5</div>
-            </Container>
-            <Container layout="flex" gap="0.5rem" wrap="nowrap" style={{ maxWidth: '300px', overflow: 'hidden' }} className="demo-wrap">
-              <div className="demo-item demo-item--small demo-item--error">No Wrap 1</div>
-              <div className="demo-item demo-item--small demo-item--error">No Wrap 2</div>
-              <div className="demo-item demo-item--small demo-item--error">No Wrap 3</div>
-              <div className="demo-item demo-item--small demo-item--error">No Wrap 4</div>
-            </Container>
-          </Container>
-
-          <Container as="article" className="demo-section">
-            <h3>📐 Gap Presets</h3>
-            <Container layout="flex" gap="small" className="demo-gap">
-              <div className="demo-item demo-item--small">Small</div>
-              <div className="demo-item demo-item--small">Gap</div>
-            </Container>
-            <Container layout="flex" gap="medium" className="demo-gap">
-              <div className="demo-item demo-item--small demo-item--primary">Medium</div>
-              <div className="demo-item demo-item--small demo-item--primary">Gap</div>
-            </Container>
-            <Container layout="flex" gap="large" className="demo-gap">
-              <div className="demo-item demo-item--small demo-item--secondary">Large</div>
-              <div className="demo-item demo-item--small demo-item--secondary">Gap</div>
-            </Container>
-            <Container layout="flex" gap="xl" className="demo-gap">
-              <div className="demo-item demo-item--small demo-item--warning">XL</div>
-              <div className="demo-item demo-item--small demo-item--warning">Gap</div>
-            </Container>
-          </Container>
-
-          <Container as="article" className="demo-section">
-            <h3>🏗️ Grid Layout</h3>
-            <Container layout="grid" gap="1rem" className="demo-grid">
-              <div className="demo-item demo-item--success">Grid 1</div>
-              <div className="demo-item demo-item--success">Grid 2</div>
-              <div className="demo-item demo-item--success">Grid 3</div>
-              <div className="demo-item demo-item--success">Grid 4</div>
-              <div className="demo-item demo-item--success">Grid 5</div>
-              <div className="demo-item demo-item--success">Grid 6</div>
-            </Container>
-          </Container>
-        </Container>
-
-        {/* Grid Component Showcase */}
-        <Container as="section" className="app-section">
-          <h2>🎯 Grid Component</h2>
-          <p>Zaawansowany system siatki z wsparciem dla responsywnych breakpointów.</p>
-
-          <Container as="article" className="demo-section">
-            <h3>📱 Responsive Breakpoints</h3>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-                <div className="demo-item demo-item--primary">xs=12<br/>sm=6<br/>md=4<br/>lg=3</div>
-              </Grid>
-              <Grid item xs={6} sm={3} md={4} lg={3}>
-                <div className="demo-item demo-item--secondary">xs=6<br/>sm=3<br/>md=4<br/>lg=3</div>
-              </Grid>
-              <Grid item xs={6} sm={3} md={4} lg={3}>
-                <div className="demo-item demo-item--success">xs=6<br/>sm=3<br/>md=4<br/>lg=3</div>
-              </Grid>
-              <Grid item xs={12} sm={12} md={12} lg={3}>
-                <div className="demo-item demo-item--warning">xs=12<br/>sm=12<br/>md=12<br/>lg=3</div>
-              </Grid>
+        {/* Responsive Dashboard Example */}
+        <section className="app-section">
+          <h2>💼 Responsive Dashboard</h2>
+          <p>Real-world layout example combining multiple components.</p>
+          
+          <Grid container spacing={3}>
+            {/* Stat Cards */}
+            <Grid item xs={12} sm={6} md={3}>
+              <Card elevation={3} padding="lg">
+                <Stack direction="column" spacing="sm" alignItems="center">
+                  <div style={{ fontSize: '2rem' }}>📊</div>
+                  <h3 style={{ margin: 0 }}>1,234</h3>
+                  <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--psc-color-text-secondary)' }}>Total Users</p>
+                </Stack>
+              </Card>
             </Grid>
-          </Container>
+            <Grid item xs={12} sm={6} md={3}>
+              <Card elevation={3} padding="lg">
+                <Stack direction="column" spacing="sm" alignItems="center">
+                  <div style={{ fontSize: '2rem' }}>💰</div>
+                  <h3 style={{ margin: 0 }}>$45.2K</h3>
+                  <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--psc-color-text-secondary)' }}>Revenue</p>
+                </Stack>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Card elevation={3} padding="lg">
+                <Stack direction="column" spacing="sm" alignItems="center">
+                  <div style={{ fontSize: '2rem' }}>📈</div>
+                  <h3 style={{ margin: 0 }}>+18.2%</h3>
+                  <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--psc-color-text-secondary)' }}>Growth</p>
+                </Stack>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Card elevation={3} padding="lg">
+                <Stack direction="column" spacing="sm" alignItems="center">
+                  <div style={{ fontSize: '2rem' }}>⭐</div>
+                  <h3 style={{ margin: 0 }}>4.8/5</h3>
+                  <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--psc-color-text-secondary)' }}>Rating</p>
+                </Stack>
+              </Card>
+            </Grid>
 
-          <Container as="article" className="demo-section">
-            <h3>🎯 Auto-sizing & Full Width</h3>
-            <Grid container spacing={2}>
-              <Grid item xs="auto">
-                <div className="demo-item demo-item--info">Auto</div>
-              </Grid>
-              <Grid item xs={true}>
-                <div className="demo-item demo-item--surface-secondary">Full Width</div>
-              </Grid>
-              <Grid item xs="auto">
-                <div className="demo-item demo-item--error">Auto</div>
-              </Grid>
+            {/* Main Content */}
+            <Grid item xs={12} md={8}>
+              <Card elevation={2} padding="xl">
+                <h3 style={{ marginTop: 0 }}>Recent Activity</h3>
+                <Stack direction="column" spacing="md">
+                  <div className="demo-item demo-item--small">User John Doe registered</div>
+                  <div className="demo-item demo-item--small">New order #1234 received</div>
+                  <div className="demo-item demo-item--small">Payment processed successfully</div>
+                </Stack>
+              </Card>
             </Grid>
-          </Container>
 
-          <Container as="article" className="demo-section">
-            <h3>📐 Spacing Levels</h3>
-            <Grid container spacing={0}>
-              <Grid item xs={4}><div className="demo-item demo-item--small">0</div></Grid>
-              <Grid item xs={4}><div className="demo-item demo-item--small">0</div></Grid>
-              <Grid item xs={4}><div className="demo-item demo-item--small">0</div></Grid>
+            {/* Sidebar */}
+            <Grid item xs={12} md={4}>
+              <Card elevation={2} padding="xl">
+                <h3 style={{ marginTop: 0 }}>Quick Actions</h3>
+                <Stack direction="column" spacing="sm">
+                  <button style={{ padding: '0.75rem', backgroundColor: 'var(--psc-color-primary)', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', width: '100%' }}>
+                    Add User
+                  </button>
+                  <button style={{ padding: '0.75rem', backgroundColor: 'var(--psc-color-secondary)', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', width: '100%' }}>
+                    View Reports
+                  </button>
+                  <button style={{ padding: '0.75rem', backgroundColor: 'var(--psc-color-success)', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', width: '100%' }}>
+                    Export Data
+                  </button>
+                </Stack>
+              </Card>
             </Grid>
-            <Grid container spacing={5}>
-              <Grid item xs={4}><div className="demo-item demo-item--large">5</div></Grid>
-              <Grid item xs={4}><div className="demo-item demo-item--large">5</div></Grid>
-              <Grid item xs={4}><div className="demo-item demo-item--large">5</div></Grid>
-            </Grid>
-          </Container>
-
-          <Container as="article" className="demo-section">
-            <h3>↔️ Justify Content Options</h3>
-            <Grid container spacing={1} justifyContent="flex-start">
-              <Grid item xs={3}><div className="demo-item">Start</div></Grid>
-              <Grid item xs={3}><div className="demo-item">Start</div></Grid>
-            </Grid>
-            <Grid container spacing={1} justifyContent="center">
-              <Grid item xs={3}><div className="demo-item demo-item--primary">Center</div></Grid>
-              <Grid item xs={3}><div className="demo-item demo-item--primary">Center</div></Grid>
-            </Grid>
-            <Grid container spacing={1} justifyContent="flex-end">
-              <Grid item xs={3}><div className="demo-item demo-item--secondary">End</div></Grid>
-              <Grid item xs={3}><div className="demo-item demo-item--secondary">End</div></Grid>
-            </Grid>
-            <Grid container spacing={1} justifyContent="space-between">
-              <Grid item xs={3}><div className="demo-item demo-item--success">Between</div></Grid>
-              <Grid item xs={3}><div className="demo-item demo-item--success">Between</div></Grid>
-            </Grid>
-          </Container>
-
-          <Container as="article" className="demo-section">
-            <h3>🔄 Direction & Wrap</h3>
-            <Grid container spacing={1} direction="row">
-              <Grid item xs={3}><div className="demo-item">Row 1</div></Grid>
-              <Grid item xs={3}><div className="demo-item">Row 2</div></Grid>
-              <Grid item xs={3}><div className="demo-item">Row 3</div></Grid>
-              <Grid item xs={3}><div className="demo-item">Row 4</div></Grid>
-            </Grid>
-            <Grid container spacing={1} direction="row-reverse">
-              <Grid item xs={3}><div className="demo-item demo-item--success">Row Reverse 1</div></Grid>
-              <Grid item xs={3}><div className="demo-item demo-item--success">Row Reverse 2</div></Grid>
-              <Grid item xs={3}><div className="demo-item demo-item--success">Row Reverse 3</div></Grid>
-              <Grid item xs={3}><div className="demo-item demo-item--success">Row Reverse 4</div></Grid>
-            </Grid>
-            <Grid container spacing={1} wrap="wrap" style={{ maxWidth: '400px' }}>
-              <Grid item xs={6}><div className="demo-item demo-item--info">Wrap 1</div></Grid>
-              <Grid item xs={6}><div className="demo-item demo-item--info">Wrap 2</div></Grid>
-              <Grid item xs={6}><div className="demo-item demo-item--info">Wrap 3</div></Grid>
-              <Grid item xs={6}><div className="demo-item demo-item--info">Wrap 4</div></Grid>
-              <Grid item xs={6}><div className="demo-item demo-item--info">Wrap 5</div></Grid>
-              <Grid item xs={6}><div className="demo-item demo-item--info">Wrap 6</div></Grid>
-            </Grid>
-          </Container>
-        </Container>
-
-        {/* Real-world Examples */}
-        <Container as="section" className="app-section">
-          <h2>💼 Praktyczne Przykłady</h2>
-          <p>Real-world zastosowania komponentów w różnych scenariuszach.</p>
-
-          <Container as="article" className="demo-section">
-            <h3>📊 Dashboard Layout</h3>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <div className="demo-item demo-item--primary demo-item--large" style={{ textAlign: 'center' }}>
-                  🏠 Header / Navigation
-                </div>
-              </Grid>
-              <Grid item xs={12} md={8}>
-                <Grid container spacing={2}>
-                  <Grid item xs={12}>
-                    <div className="demo-item demo-item--success demo-item--large">
-                      📈 Main Chart Area
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <div className="demo-item demo-item--info">
-                      📊 Statistics Card 1
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <div className="demo-item demo-item--warning">
-                      📊 Statistics Card 2
-                    </div>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid container spacing={1}>
-                      <Grid item xs={6} sm={3}>
-                        <div className="demo-item demo-item--secondary">📱 Mobile</div>
-                      </Grid>
-                      <Grid item xs={6} sm={3}>
-                        <div className="demo-item demo-item--secondary">💻 Desktop</div>
-                      </Grid>
-                      <Grid item xs={6} sm={3}>
-                        <div className="demo-item demo-item--secondary">📱 Tablet</div>
-                      </Grid>
-                      <Grid item xs={6} sm={3}>
-                        <div className="demo-item demo-item--secondary">🖥️ Large</div>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Grid container spacing={2} direction="column">
-                  <Grid item xs={12}>
-                    <div className="demo-item demo-item--error">
-                      🚨 Alerts & Notifications
-                    </div>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <div className="demo-item demo-item--surface-secondary">
-                      👤 User Profile
-                    </div>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <div className="demo-item demo-item--surface-secondary">
-                      ⚙️ Settings
-                    </div>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item xs={12}>
-                <div className="demo-item demo-item--surface-secondary demo-item--large" style={{ textAlign: 'center' }}>
-                  🦶 Footer
-                </div>
-              </Grid>
-            </Grid>
-          </Container>
-
-          <Container as="article" className="demo-section">
-            <h3>🛍️ Product Grid</h3>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-                <div className="demo-item demo-item--large" style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📱</div>
-                  <div style={{ fontWeight: 'bold' }}>Smartphone</div>
-                  <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>$599</div>
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-                <div className="demo-item demo-item--large" style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>💻</div>
-                  <div style={{ fontWeight: 'bold' }}>Laptop</div>
-                  <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>$1299</div>
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-                <div className="demo-item demo-item--large" style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>⌚</div>
-                  <div style={{ fontWeight: 'bold' }}>Smartwatch</div>
-                  <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>$299</div>
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-                <div className="demo-item demo-item--large" style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🎧</div>
-                  <div style={{ fontWeight: 'bold' }}>Headphones</div>
-                  <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>$199</div>
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-                <div className="demo-item demo-item--large" style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📷</div>
-                  <div style={{ fontWeight: 'bold' }}>Camera</div>
-                  <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>$899</div>
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-                <div className="demo-item demo-item--large" style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🎮</div>
-                  <div style={{ fontWeight: 'bold' }}>Gaming Console</div>
-                  <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>$499</div>
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-                <div className="demo-item demo-item--large" style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📺</div>
-                  <div style={{ fontWeight: 'bold' }}>Smart TV</div>
-                  <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>$799</div>
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-                <div className="demo-item demo-item--large" style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔊</div>
-                  <div style={{ fontWeight: 'bold' }}>Sound System</div>
-                  <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>$349</div>
-                </div>
-              </Grid>
-            </Grid>
-          </Container>
-
-          <Container as="article" className="demo-section">
-            <h3>🎨 Color Showcase</h3>
-            <Grid container spacing={2}>
-              <Grid item xs={6} sm={4} md={2}><div className="demo-item demo-item--primary">Primary</div></Grid>
-              <Grid item xs={6} sm={4} md={2}><div className="demo-item demo-item--secondary">Secondary</div></Grid>
-              <Grid item xs={6} sm={4} md={2}><div className="demo-item demo-item--success">Success</div></Grid>
-              <Grid item xs={6} sm={4} md={2}><div className="demo-item demo-item--warning">Warning</div></Grid>
-              <Grid item xs={6} sm={4} md={2}><div className="demo-item demo-item--error">Error</div></Grid>
-              <Grid item xs={6} sm={4} md={2}><div className="demo-item demo-item--info">Info</div></Grid>
-            </Grid>
-          </Container>
-
-          <Container as="article" className="demo-section">
-            <h3>📝 Form Layout</h3>
-            <Container layout="flex" direction="column" gap="1.5rem" style={{ maxWidth: '400px' }}>
-              <Container layout="flex" direction="column" gap="0.5rem">
-                <label style={{ fontWeight: 'bold' }}>Email</label>
-                <input type="email" placeholder="your@email.com" style={{
-                  padding: '0.5rem',
-                  border: '1px solid var(--color-border)',
-                  borderRadius: '4px',
-                  backgroundColor: 'var(--color-surface)',
-                  color: 'var(--color-text-primary)'
-                }} />
-              </Container>
-              <Container layout="flex" direction="column" gap="0.5rem">
-                <label style={{ fontWeight: 'bold' }}>Password</label>
-                <input type="password" placeholder="••••••••" style={{
-                  padding: '0.5rem',
-                  border: '1px solid var(--color-border)',
-                  borderRadius: '4px',
-                  backgroundColor: 'var(--color-surface)',
-                  color: 'var(--color-text-primary)'
-                }} />
-              </Container>
-              <Container layout="flex" gap="1rem" alignItems="center">
-                <input type="checkbox" id="remember" />
-                <label htmlFor="remember">Remember me</label>
-              </Container>
-              <Container layout="flex" gap="1rem">
-                <button style={{
-                  flex: 1,
-                  padding: '0.75rem',
-                  backgroundColor: 'var(--color-primary)',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer'
-                }}>Sign In</button>
-                <button style={{
-                  flex: 1,
-                  padding: '0.75rem',
-                  backgroundColor: 'transparent',
-                  color: 'var(--color-text-primary)',
-                  border: '1px solid var(--color-border)',
-                  borderRadius: '4px',
-                  cursor: 'pointer'
-                }}>Sign Up</button>
-              </Container>
-            </Container>
-          </Container>
-        </Container>
-
-        {/* Theme Showcase */}
-        <Container as="section" className="app-section">
-          <h2>🎭 Theme System</h2>
-          <p>Dynamiczne motywy z wsparciem dla jasnego, ciemnego i systemowego motywu.</p>
-
-          <Container as="article" className="demo-section">
-            <h3>🎨 Theme Colors</h3>
-            <Grid container spacing={2}>
-              <Grid item xs={6} sm={4} md={3}>
-                <div className="demo-item" style={{ backgroundColor: 'var(--color-surface)' }}>
-                  Surface
-                </div>
-              </Grid>
-              <Grid item xs={6} sm={4} md={3}>
-                <div className="demo-item" style={{ backgroundColor: 'var(--color-surface-secondary)' }}>
-                  Surface Secondary
-                </div>
-              </Grid>
-              <Grid item xs={6} sm={4} md={3}>
-                <div className="demo-item" style={{ backgroundColor: 'var(--color-text-primary)', color: 'var(--color-surface)' }}>
-                  Text Primary
-                </div>
-              </Grid>
-              <Grid item xs={6} sm={4} md={3}>
-                <div className="demo-item" style={{ backgroundColor: 'var(--color-text-secondary)', color: 'var(--color-surface)' }}>
-                  Text Secondary
-                </div>
-              </Grid>
-              <Grid item xs={6} sm={4} md={3}>
-                <div className="demo-item" style={{ backgroundColor: 'var(--color-primary)' }}>
-                  Primary
-                </div>
-              </Grid>
-              <Grid item xs={6} sm={4} md={3}>
-                <div className="demo-item" style={{ backgroundColor: 'var(--color-secondary)' }}>
-                  Secondary
-                </div>
-              </Grid>
-              <Grid item xs={6} sm={4} md={3}>
-                <div className="demo-item" style={{ backgroundColor: 'var(--color-success)' }}>
-                  Success
-                </div>
-              </Grid>
-              <Grid item xs={6} sm={4} md={3}>
-                <div className="demo-item" style={{ backgroundColor: 'var(--color-border)' }}>
-                  Border
-                </div>
-              </Grid>
-            </Grid>
-          </Container>
-        </Container>
+          </Grid>
+        </section>
       </Container>
 
+      {/* Footer */}
       <Container as="footer" className="app-footer">
-        <p>© 2024 Preact SCSS Components. Wszelkie prawa zastrzeżone.</p>
+        <p style={{ margin: 0 }}>
+          © 2024 Preact SCSS Components • Built with ❤️ using Preact & SCSS
+        </p>
       </Container>
     </Container>
   );
