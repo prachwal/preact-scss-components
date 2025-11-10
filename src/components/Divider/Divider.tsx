@@ -69,32 +69,31 @@ export const Divider: FunctionComponent<DividerProps> = ({
   ].filter(Boolean).join(' ');
 
   const baseStyle = style && typeof style === 'object' ? style : {};
-  const orientationStyle = orientation === 'vertical'
-    ? { height: '100%', width: '1px' }
-    : {};
 
+  // Don't override height/width from inline styles
   const combinedStyle = {
-    ...baseStyle,
-    ...orientationStyle
+    ...baseStyle
   };
 
+  // Render with title (three parts: line - title - line)
   if (hasTitle) {
     return h(Tag, {
       className: combinedClassName,
       style: combinedStyle,
       ...props
     }, [
-      h('span', { className: 'divider__line' }),
-      h('span', { className: 'divider__title' }, displayTitle),
-      h('span', { className: 'divider__line' })
+      h('span', { className: 'divider__line', key: 'line-1' }),
+      h('span', { className: 'divider__title', key: 'title' }, displayTitle),
+      h('span', { className: 'divider__line', key: 'line-2' })
     ]);
   }
 
+  // Render without title (just a single line)
   return h(Tag, {
     className: combinedClassName,
     style: combinedStyle,
     ...props
-  });
+  }, h('span', { className: 'divider__line' }));
 };
 
 export default Divider;

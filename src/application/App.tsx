@@ -20,14 +20,6 @@ import './App.scss';
 
 /**
  * Main application component that renders a comprehensive demo of all Preact SCSS components.
- * 
- * This component demonstrates:
- * - Responsive design with mobile-first approach
- * - Complete component library showcase
- * - Theme switching (light/dark/system)
- * - Layout patterns and best practices
- *
- * @returns JSX element containing the main app structure
  */
 export function App() {
   const themeContext = useContext(ThemeContext);
@@ -40,26 +32,24 @@ export function App() {
 
   return (
     <Container className="app">
-      {/* Header with Theme Toggle */}
+      {/* Header with Theme Toggle - FIXED */}
       <Container as="header" className="app-header">
-        <Container layout="flex" justifyContent="space-between" alignItems="center" gap="1rem">
-          <h1 className="app-header__title">
-            🎨 Preact SCSS Components
-          </h1>
-          <Container layout="flex" gap="1rem" alignItems="center">
-            <span className="app-header__theme-info">
-              {getThemeLabel(theme)} ({getThemeIcon(currentTheme)})
-            </span>
-            <button
-              type="button"
-              className="app-header__theme-button"
-              onClick={toggleTheme}
-              aria-label={`Switch to ${theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light'} theme`}
-            >
-              {theme === 'light' ? '🌙' : theme === 'dark' ? '⚙️' : '☀️'}
-            </button>
-          </Container>
-        </Container>
+        <h1 className="app-header__title">
+          🎨 Preact SCSS Components
+        </h1>
+        <div className="app-header__controls">
+          <span className="app-header__theme-info">
+            {getThemeLabel(theme)} ({getThemeIcon(currentTheme)})
+          </span>
+          <button
+            type="button"
+            className="app-header__theme-button"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light'} theme`}
+          >
+            {theme === 'light' ? '🌙' : theme === 'dark' ? '⚙️' : '☀️'}
+          </button>
+        </div>
       </Container>
 
       {/* Main Content */}
@@ -210,20 +200,23 @@ export function App() {
           <p>Visual separators for content sections.</p>
           
           <div className="demo-section">
+            <h3>Horizontal Divider</h3>
             <div className="demo-item demo-item--small">Content Above</div>
             <Divider />
             <div className="demo-item demo-item--small">Content Below</div>
           </div>
 
           <div className="demo-section">
+            <h3>Divider with Title</h3>
             <Divider title="Section Title" />
           </div>
 
           <div className="demo-section">
-            <Stack direction="row" spacing="md" alignItems="center">
-              <div className="demo-item demo-item--small">Left</div>
+            <h3>Vertical Divider</h3>
+            <Stack direction="row" spacing="md" alignItems="stretch" style={{ minHeight: '80px' }}>
+              <div className="demo-item demo-item--small" style={{ flex: 1 }}>Left</div>
               <Divider orientation="vertical" />
-              <div className="demo-item demo-item--small">Right</div>
+              <div className="demo-item demo-item--small" style={{ flex: 1 }}>Right</div>
             </Stack>
           </div>
         </section>

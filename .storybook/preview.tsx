@@ -249,10 +249,10 @@ function ThemeToggleButton() {
       right: '1rem',
       zIndex: 1000,
       padding: '0.5rem',
-      border: '1px solid var(--color-border)',
+      border: '1px solid var(--psc-color-border)',
       borderRadius: '0.25rem',
-      backgroundColor: 'var(--color-surface)',
-      color: 'var(--color-text-primary)',
+      backgroundColor: 'var(--psc-color-surface)',
+      color: 'var(--psc-color-text-primary)',
       cursor: 'pointer',
       fontSize: '1.2rem',
     }

@@ -3,12 +3,22 @@
   align-items: center;
   margin: var(--psc-spacing-md) 0;
   border: none;
+  box-sizing: border-box;
 
+  // Horizontal divider (default)
+  &--horizontal {
+    width: 100%;
+    flex-direction: row;
+  }
+
+  // Vertical divider - POPRAWIONA WERSJA
   &--vertical {
-    flex-direction: column;
+    height: auto; // Pozwala na naturalną wysokość
+    width: 1px; // Stała szerokość dla linii
     margin: 0 var(--psc-spacing-md);
-    height: 100%;
-    width: 1px;
+    flex-direction: column;
+    align-self: stretch; // Rozciąga się na pełną wysokość rodzica
+    flex-shrink: 0; // Nie pozwala się zmniejszać
   }
 
   &--dashed {
@@ -26,22 +36,44 @@
       margin: 0 var(--psc-spacing-md);
       font-size: 0.875rem;
       font-weight: 500;
-      color: var(--psc-color-text-secondary, #6c757d);
+      color: var(--psc-color-text-secondary);
       white-space: nowrap;
     }
   }
 
-    &__line {
-    border-top: 1px solid var(--psc-color-border, #dee2e6);
-    border-left: none;
-    flex: 1;
+  // Line styles
+  &__line {
+    box-sizing: border-box;
+    
+    // Horizontal line (default)
+    width: 100%;
     height: 0;
+    border: none;
+    border-top: 1px solid var(--psc-color-border);
+    flex: 1;
+  }
 
-    .divider--vertical & {
-      border-top: none;
-      border-left: 1px solid var(--psc-color-border, #dee2e6);
-      width: 0;
-      height: 100%;
-    }
+  // Vertical line override - UPROSZCZONA WERSJA
+  &--vertical &__line {
+    width: 1px;
+    height: 100%; // Pełna wysokość
+    border: none;
+    border-left: 1px solid var(--psc-color-border); // Używamy border-left dla pionowej linii
+    flex: none; // Nie rozciąga się
+  }
+}
+
+// Vertical divider with title - special handling
+.divider--vertical.divider--with-title {
+  .divider__title {
+    margin: var(--psc-spacing-md) 0; // Vertical margin for vertical divider
+    text-align: center;
+    writing-mode: vertical-rl; // Rotate text for vertical layout
+    text-orientation: mixed;
+  }
+
+  .divider__line {
+    flex: 1;
+    align-self: stretch;
   }
 }

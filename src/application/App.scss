@@ -20,60 +20,75 @@
     top: 0;
     z-index: 100;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    gap: var(--psc-spacing-sm);
 
     // Tablet and up
     @include respond-to(md) {
       padding: var(--psc-spacing-md) var(--psc-spacing-lg);
+      gap: var(--psc-spacing-md);
     }
 
     // Desktop and up
     @include respond-to(lg) {
       padding: var(--psc-spacing-md) var(--psc-spacing-2xl);
+      gap: var(--psc-spacing-lg);
     }
 
     &__title {
       margin: 0;
-      font-size: 1.125rem;
+      font-size: clamp(0.875rem, 2.5vw, 1.75rem);
       color: var(--psc-color-text-primary);
       font-weight: 700;
+      flex: 1 1 auto;
+      min-width: 0; // Pozwala na shrink
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-      // Tablet and up
-      @include respond-to(md) {
-        font-size: 1.5rem;
-      }
-
-      // Desktop and up
-      @include respond-to(lg) {
-        font-size: 1.75rem;
-      }
+    &__controls {
+      display: flex;
+      align-items: center;
+      gap: var(--psc-spacing-sm);
+      flex: 0 0 auto; // Nie rośnie, nie shrinkuje
+      margin-left: auto; // Wyrównanie do prawej
     }
 
     &__theme-info {
       display: none;
+      font-size: 0.875rem;
+      color: var(--psc-color-text-secondary);
+      white-space: nowrap;
       
       // Tablet and up
       @include respond-to(md) {
         display: inline-block;
-        font-size: 0.875rem;
-        color: var(--psc-color-text-secondary);
       }
     }
 
     &__theme-button {
-      padding: var(--psc-spacing-sm) var(--psc-spacing-md);
+      padding: var(--psc-spacing-xs) var(--psc-spacing-sm);
       border: 1px solid var(--psc-color-border);
       border-radius: var(--psc-border-radius-md);
       background-color: var(--psc-color-primary);
       color: var(--psc-color-white);
       cursor: pointer;
-      font-size: 0.875rem;
+      font-size: 1.125rem;
       transition: all 0.2s ease;
       white-space: nowrap;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2.5rem;
+      min-height: 2.5rem;
 
       // Desktop and up
       @include respond-to(lg) {
-        padding: var(--psc-spacing-sm) var(--psc-spacing-lg);
-        font-size: 1rem;
+        padding: var(--psc-spacing-sm) var(--psc-spacing-md);
+        font-size: 1.25rem;
+        min-width: 3rem;
+        min-height: 3rem;
       }
 
       &:hover {

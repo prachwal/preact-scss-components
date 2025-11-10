@@ -88,12 +88,12 @@ Components automatically adapt to the current theme using CSS Custom Properties:
 
 ```scss
 .my-component {
-  background-color: var(--color-surface);
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-border);
+  background-color: var(--psc-color-surface);
+  color: var(--psc-color-text-primary);
+  border: 1px solid var(--psc-color-border);
 
   &:hover {
-    background-color: var(--color-surface-secondary);
+    background-color: var(--psc-color-surface-secondary);
   }
 }
 ```
@@ -213,15 +213,15 @@ The theme system uses CSS Custom Properties for dynamic theming:
 
 ```css
 :root {
-  --color-surface: #ffffff;
-  --color-text-primary: #212529;
-  --color-border: #dee2e6;
+  --psc-color-surface: #ffffff;
+  --psc-color-text-primary: #212529;
+  --psc-color-border: #dee2e6;
   /* ... more variables */
 }
 
 html[data-theme="dark"] {
-  --color-surface: #1a1a1a;
-  --color-text-primary: #f8fbfc;
+  --psc-color-surface: #1a1a1a;
+  --psc-color-text-primary: #f8fbfc;
   /* ... dark theme overrides */
 }
 ```

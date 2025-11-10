@@ -263,7 +263,7 @@ $colors: (
   $theme-colors: map.get($colors, $theme);
 
   @each $key, $value in $theme-colors {
-    --color-#{$key}: #{$value};
+    --psc-color-#{$key}: #{$value};
   }
 }
 
@@ -461,20 +461,20 @@ export function setupSystemThemeListener(systemThemeSignal: ReturnType<typeof si
 
 ```css
 :root {
-  --color-surface: #ffffff;           /* Biały */
-  --color-surface-secondary: #f8f9fa; /* Jasnoszary */
-  --color-surface-tertiary: #e9ecef;  /* Trzeciorzędne tło */
-  --color-text-primary: #212529;      /* Ciemny tekst */
-  --color-text-secondary: #6c757d;    /* Średni szary tekst */
-  --color-text-tertiary: #868e96;     /* Trzeciorzędny tekst */
-  --color-border: #dee2e6;            /* Jasna ramka */
-  --color-border-hover: #ced4da;      /* Ramka hover */
-  --color-primary: #007bff;           /* Niebieski */
-  --color-button-primary-bg: #007bff; /* Tło przycisku primary */
-  --color-button-primary-text: #ffffff; /* Tekst przycisku primary */
-  --color-button-outline-bg: #ffffff; /* Biały przycisk outline */
-  --color-button-outline-text: #6c757d; /* Szary tekst przycisku outline */
-  --color-button-outline-border: #dee2e6; /* Ramka przycisku outline */
+  --psc-color-surface: #ffffff;           /* Biały */
+  --psc-color-surface-secondary: #f8f9fa; /* Jasnoszary */
+  --psc-color-surface-tertiary: #e9ecef;  /* Trzeciorzędne tło */
+  --psc-color-text-primary: #212529;      /* Ciemny tekst */
+  --psc-color-text-secondary: #6c757d;    /* Średni szary tekst */
+  --psc-color-text-tertiary: #868e96;     /* Trzeciorzędny tekst */
+  --psc-color-border: #dee2e6;            /* Jasna ramka */
+  --psc-color-border-hover: #ced4da;      /* Ramka hover */
+  --psc-color-primary: #007bff;           /* Niebieski */
+  --psc-color-button-primary-bg: #007bff; /* Tło przycisku primary */
+  --psc-color-button-primary-text: #ffffff; /* Tekst przycisku primary */
+  --psc-color-button-outline-bg: #ffffff; /* Biały przycisk outline */
+  --psc-color-button-outline-text: #6c757d; /* Szary tekst przycisku outline */
+  --psc-color-button-outline-border: #dee2e6; /* Ramka przycisku outline */
   /* ... pozostałe zmienne (pełne palety kolorów) */
 }
 ```
@@ -497,20 +497,20 @@ export function setupSystemThemeListener(systemThemeSignal: ReturnType<typeof si
 
 ```css
 html[data-theme="dark"] {
-  --color-surface: #1a1a1a;           /* Ciemnoszare tło */
-  --color-surface-secondary: #2d3236; /* Średnio ciemne */
-  --color-surface-tertiary: #495057;  /* Trzeciorzędne ciemne */
-  --color-text-primary: #f8fbfc;      /* Jasny tekst */
-  --color-text-secondary: #adb5bd;    /* Jasnoszary tekst */
-  --color-text-tertiary: #868e96;     /* Trzeciorzędny jasny tekst */
-  --color-border: #495057;            /* Ciemna ramka */
-  --color-border-hover: #6c757d;      /* Ciemna ramka hover */
-  --color-primary: #4dabf7;           /* Jaśniejszy niebieski */
-  --color-button-primary-bg: #4dabf7; /* Tło przycisku primary */
-  --color-button-primary-text: #1a1a1a; /* Ciemny tekst na przycisku */
-  --color-button-outline-bg: #2d3236; /* Ciemne tło przycisku outline */
-  --color-button-outline-text: #adb5bd; /* Jasny tekst przycisku outline */
-  --color-button-outline-border: #495057; /* Ciemna ramka przycisku outline */
+  --psc-color-surface: #1a1a1a;           /* Ciemnoszare tło */
+  --psc-color-surface-secondary: #2d3236; /* Średnio ciemne */
+  --psc-color-surface-tertiary: #495057;  /* Trzeciorzędne ciemne */
+  --psc-color-text-primary: #f8fbfc;      /* Jasny tekst */
+  --psc-color-text-secondary: #adb5bd;    /* Jasnoszary tekst */
+  --psc-color-text-tertiary: #868e96;     /* Trzeciorzędny jasny tekst */
+  --psc-color-border: #495057;            /* Ciemna ramka */
+  --psc-color-border-hover: #6c757d;      /* Ciemna ramka hover */
+  --psc-color-primary: #4dabf7;           /* Jaśniejszy niebieski */
+  --psc-color-button-primary-bg: #4dabf7; /* Tło przycisku primary */
+  --psc-color-button-primary-text: #1a1a1a; /* Ciemny tekst na przycisku */
+  --psc-color-button-outline-bg: #2d3236; /* Ciemne tło przycisku outline */
+  --psc-color-button-outline-text: #adb5bd; /* Jasny tekst przycisku outline */
+  --psc-color-button-outline-border: #495057; /* Ciemna ramka przycisku outline */
   /* ... pozostałe zmienne (pełne palety kolorów) */
 }
 ```
@@ -542,17 +542,17 @@ html[data-theme="dark"] {
 
 ```scss
 .example-component {
-  background-color: var(--color-surface);
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-border);
+  background-color: var(--psc-color-surface);
+  color: var(--psc-color-text-primary);
+  border: 1px solid var(--psc-color-border);
 
   &__button {
-    background-color: var(--color-button-outline-bg);
-    color: var(--color-button-outline-text);
-    border: 1px solid var(--color-button-outline-border);
+    background-color: var(--psc-color-button-outline-bg);
+    color: var(--psc-color-button-outline-text);
+    border: 1px solid var(--psc-color-button-outline-border);
 
     &:hover {
-      background-color: var(--color-button-outline-hover);
+      background-color: var(--psc-color-button-outline-hover);
     }
   }
 }
@@ -601,7 +601,7 @@ html[data-theme="dark"] {
 2. **Zapis do localStorage** → natychmiastowy zapis
 3. **Obliczenie currentTheme** → `computed()` reaguje na zmianę
 4. **Aktualizacja HTML** → `effect()` ustawia `data-theme` na `<html>`
-5. **CSS reaguje automatycznie** → wszystkie `var(--color-*)` zmieniają się natychmiast
+5. **CSS reaguje automatycznie** → wszystkie `var(--psc-color-*)` zmieniają się natychmiast
 6. **Komponenty renderują się ponownie** → z nowymi kolorami
 
 ### Obsługa Zmian Systemowych Preferencji
@@ -617,7 +617,7 @@ html[data-theme="dark"] {
 
 ```javascript
 // W konsoli przeglądarki
-getComputedStyle(document.documentElement).getPropertyValue('--color-surface');
+getComputedStyle(document.documentElement).getPropertyValue('--psc-color-surface');
 // → "#ffffff" (jasny) lub "#1a1a1a" (ciemny)
 ```
 
@@ -719,7 +719,7 @@ Signals są automatycznie reaktywne - zmiana wartości powoduje natychmiastową 
 
 ### Problem: Kolory nie zmieniają się
 
-**Przyczyna:** Użycie `theme-color()` zamiast `var(--color-*)` w CSS
+**Przyczyna:** Użycie `theme-color()` zamiast `var(--psc-color-*)` w CSS
 **Rozwiązanie:** Zamień wszystkie wystąpienia na CSS custom properties, ponieważ `theme-color()` działa tylko w SCSS, nie w runtime
 
 ### Problem: Nieprawidłowe kolory w systemie motywów

@@ -111,14 +111,14 @@ export const InContent: Story = {
 export const VerticalInLayout: Story = {
   render: () => (
     <div style={{ display: 'flex', height: '200px', gap: '20px', alignItems: 'stretch' }}>
-      <div style={{ flex: 1, padding: '20px', backgroundColor: '#f5f5f5' }}>
+      <div style={{ flex: 1, padding: '20px', backgroundColor: 'var(--psc-color-surface-secondary)' }}>
         <h3>Left Panel</h3>
         <p>Content in the left panel.</p>
       </div>
 
       <Divider orientation="vertical" />
 
-      <div style={{ flex: 1, padding: '20px', backgroundColor: '#f5f5f5' }}>
+      <div style={{ flex: 1, padding: '20px', backgroundColor: 'var(--psc-color-surface-secondary)' }}>
         <h3>Right Panel</h3>
         <p>Content in the right panel.</p>
       </div>

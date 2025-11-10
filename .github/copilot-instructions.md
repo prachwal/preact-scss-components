@@ -25,14 +25,14 @@ Uses Vite for library bundling, Preact Signals for reactive state, and CSS Custo
 
 ## Theme System Architecture
 - **Synchronous Injection**: Theme applied to `<html>` element before render to prevent FOUC
-- **CSS Custom Properties**: All colors use `var(--color-semantic-name)` for theme switching
+- **CSS Custom Properties**: All colors use `var(--psc-color-semantic-name)` for theme switching
 - **Persistence**: Theme choice saved to localStorage with `createPersistedSignal`
 - **System Theme**: Respects `prefers-color-scheme` media query
 - **Semantic Colors**: Use `surface`, `text-primary`, `border`, etc. instead of hardcoded colors
 
 ## Styling Conventions
 - **SCSS Modules**: Use `@use` imports in `src/styles/index.scss`
-- **CSS Variables**: Access colors via `var(--color-surface)`, `var(--color-text-primary)`
+- **CSS Variables**: Access colors via `var(--psc-color-surface)`, `var(--psc-color-text-primary)`
 - **BEM Methodology**: `.component-name__element--modifier` naming
 - **Spacing System**: Use `spacing(sm|medium|large|xl)` functions
 - **Theme Overrides**: Dark theme applied via `html[data-theme="dark"]` selector
@@ -84,14 +84,14 @@ Uses Vite for library bundling, Preact Signals for reactive state, and CSS Custo
 2. **Props Interface**: `ComponentNameProps` defined at top of component file
 3. **Signal Usage**: `const state = signal(initialValue)` for reactive state
 4. **Styling**: `@use "@styles/_variables"` and CSS custom properties
-5. **Theme Colors**: Never use hardcoded colors - always `var(--color-semantic-name)`
+5. **Theme Colors**: Never use hardcoded colors - always `var(--psc-color-semantic-name)`
 6. **Persistence**: `createPersistedSignal` for values that survive page reloads
 7. **Error Handling**: Try/catch for localStorage operations with fallbacks
 8. **Testing**: Mock external dependencies, test theme switching behavior
 
 ## Anti-Patterns to Avoid
 
-1. **Hardcoded Colors**: Never use `#ffffff` - use `var(--color-surface)` instead
+1. **Hardcoded Colors**: Never use `#ffffff` - use `var(--psc-color-surface)` instead
 2. **useState Hooks**: Prefer signals for reactive state management
 3. **Generic Divs**: Use semantic HTML5 elements (`<article>`, `<header>`, `<main>`)
 4. **Direct localStorage**: Use `createPersistedSignal` for reactive persistence
@@ -110,7 +110,7 @@ Uses Vite for library bundling, Preact Signals for reactive state, and CSS Custo
 
 ## Theme Implementation Checklist
 - [ ] Synchronous theme injection before render (`injectThemeToHTML`)
-- [ ] CSS custom properties for all colors (`var(--color-surface)`)
+- [ ] CSS custom properties for all colors (`var(--psc-color-surface)`)
 - [ ] System preference detection (`prefers-color-scheme`)
 - [ ] localStorage persistence with error handling
 - [ ] Theme switching: light → dark → system → light

@@ -78,7 +78,7 @@
   &__divider {
     width: 1px;
     height: 1px;
-    background-color: var(--color-border, #d9d9d9);
+    background-color: var(--psc-color-border, #d9d9d9);
     flex-shrink: 0;
 
     // For vertical dividers in row layout
