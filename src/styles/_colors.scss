@@ -1,0 +1,231 @@
+@use "sass:map";
+
+// Color variables - WCAG AA compliant palettes
+$colors: (
+  light: (
+    // Primary colors
+    primary: #007bff,
+    primary-50: #e7f3ff,
+    primary-100: #d0e7ff,
+    primary-200: #a5d1ff,
+    primary-300: #74b9ff,
+    primary-400: #42a1ff,
+    primary-500: #007bff,
+    primary-600: #0066cc,
+    primary-700: #0052a3,
+    primary-800: #004080,
+    primary-900: #002966,
+
+    // Secondary
+    secondary: #6c757d,
+    secondary-50: #f8f9fa,
+    secondary-100: #e9ecef,
+    secondary-200: #dee2e6,
+    secondary-300: #ced4da,
+    secondary-400: #adb5bd,
+    secondary-500: #6c757d,
+    secondary-600: #5a6268,
+    secondary-700: #495057,
+    secondary-800: #343a40,
+    secondary-900: #212529,
+
+    // Success
+    success: #28a745,
+    success-50: #e8f5e8,
+    success-100: #d4edda,
+    success-200: #c3e6cb,
+    success-300: #abe2b7,
+    success-400: #8fd6a0,
+    success-500: #28a745,
+    success-600: #218838,
+    success-700: #1e7e34,
+    success-800: #1c7430,
+    success-900: #155724,
+
+    // Warning
+    warning: #ffc107,
+    warning-50: #fff9e6,
+    warning-100: #fff3cd,
+    warning-200: #ffeaa7,
+    warning-300: #ffdf7e,
+    warning-400: #ffd43b,
+    warning-500: #ffc107,
+    warning-600: #e0a800,
+    warning-700: #d39e00,
+    warning-800: #b8860b,
+    warning-900: #997404,
+
+    // Error/Danger
+    error: #dc3545,
+    error-50: #fee,
+    error-100: #f8d7da,
+    error-200: #f5c6cb,
+    error-300: #f1aeb5,
+    error-400: #ea868f,
+    error-500: #dc3545,
+    error-600: #c82333,
+    error-700: #bd2130,
+    error-800: #a02622,
+    error-900: #721c24,
+
+    // Info
+    info: #17a2b8,
+    info-50: #e0f7fa,
+    info-100: #b2ebf2,
+    info-200: #80deea,
+    info-300: #4dd0e1,
+    info-400: #26c6da,
+    info-500: #17a2b8,
+    info-600: #138496,
+    info-700: #117a8b,
+    info-800: #0e6269,
+    info-900: #0b4f56,
+
+    // Neutral/Background
+    white: #ffffff,
+    gray-50: #f8f9fa,
+    gray-100: #e9ecef,
+    gray-200: #dee2e6,
+    gray-300: #ced4da,
+    gray-400: #adb5bd,
+    gray-500: #6c757d,
+    gray-600: #5a6268,
+    gray-700: #495057,
+    gray-800: #343a40,
+    gray-900: #212529,
+    black: #000000,
+
+    // Semantic colors for components
+    surface: #ffffff,
+    surface-secondary: #f8f9fa,
+    surface-tertiary: #e9ecef,
+    border: #dee2e6,
+    border-hover: #ced4da,
+    text-primary: #212529,
+    text-secondary: #6c757d,
+    text-tertiary: #868e96,
+    button-primary-bg: #007bff,
+    button-primary-text: #ffffff,
+    button-primary-hover: #0066cc,
+    button-secondary-bg: #6c757d,
+    button-secondary-text: #ffffff,
+    button-secondary-hover: #5a6268,
+    button-outline-bg: #ffffff,
+    button-outline-text: #6c757d,
+    button-outline-border: #dee2e6,
+    button-outline-hover: #f8f9fa
+  ),
+  dark: (
+    // Primary colors (lighter for dark theme)
+    primary: #4dabf7,
+    primary-50: #0a1929,
+    primary-100: #0f2942,
+    primary-200: #1e4976,
+    primary-300: #2d69aa,
+    primary-400: #3c89de,
+    primary-500: #4dabf7,
+    primary-600: #6bb8f8,
+    primary-700: #89c5f9,
+    primary-800: #a7d2fa,
+    primary-900: #c5dffc,
+
+    // Secondary
+    secondary: #adb5bd,
+    secondary-50: #1a1d1e,
+    secondary-100: #2d3236,
+    secondary-200: #495057,
+    secondary-300: #6c757d,
+    secondary-400: #868e96,
+    secondary-500: #adb5bd,
+    secondary-600: #b8c1c6,
+    secondary-700: #c3cdd2,
+    secondary-800: #ced9de,
+    secondary-900: #d9e4ea,
+
+    // Success
+    success: #51cf66,
+    success-50: #0b1a0f,
+    success-100: #16301e,
+    success-200: #2c5f3d,
+    success-300: #428f5c,
+    success-400: #58bf7b,
+    success-500: #51cf66,
+    success-600: #74d680,
+    success-700: #97dd9a,
+    success-800: #bae4b4,
+    success-900: #ddecce,
+
+    // Warning
+    warning: #ffd43b,
+    warning-50: #1a1a0a,
+    warning-100: #332f0a,
+    warning-200: #665e14,
+    warning-300: #998d1f,
+    warning-400: #ccbc29,
+    warning-500: #ffd43b,
+    warning-600: #ffdd5e,
+    warning-700: #ffe681,
+    warning-800: #ffefa4,
+    warning-900: #fff8c7,
+
+    // Error/Danger
+    error: #ff6b6b,
+    error-50: #1a0d0d,
+    error-100: #331a1a,
+    error-200: #662f2f,
+    error-300: #994545,
+    error-400: #cc5a5a,
+    error-500: #ff6b6b,
+    error-600: #ff8585,
+    error-700: #ff9f9f,
+    error-800: #ffb9b9,
+    error-900: #ffd3d3,
+
+    // Info
+    info: #74c0fc,
+    info-50: #0d1418,
+    info-100: #1a2830,
+    info-200: #355060,
+    info-300: #4f7890,
+    info-400: #6aa0c0,
+    info-500: #74c0fc,
+    info-600: #8ccafd,
+    info-700: #a4d4fd,
+    info-800: #bcdefe,
+    info-900: #d4e8fe,
+
+    // Neutral/Background
+    white: #ffffff,
+    gray-50: #1a1a1a,    // Very dark for dark theme backgrounds
+    gray-100: #2d3236,   // Dark gray for subtle backgrounds
+    gray-200: #495057,   // Medium dark gray
+    gray-300: #6c757d,   // Medium gray
+    gray-400: #868e96,   // Light medium gray
+    gray-500: #adb5bd,   // Light gray
+    gray-600: #c3cdd2,   // Very light gray
+    gray-700: #d9e4ea,   // Almost white
+    gray-800: #e9f0f5,   // Very light
+    gray-900: #f8fbfc,   // Nearly white
+    black: #000000,
+
+    // Semantic colors for components (dark theme)
+    surface: #1a1a1a,
+    surface-secondary: #2d3236,
+    surface-tertiary: #495057,
+    border: #495057,
+    border-hover: #6c757d,
+    text-primary: #f8fbfc,
+    text-secondary: #adb5bd,
+    text-tertiary: #868e96,
+    button-primary-bg: #4dabf7,
+    button-primary-text: #1a1a1a,
+    button-primary-hover: #6bb8f8,
+    button-secondary-bg: #6c757d,
+    button-secondary-text: #f8fbfc,
+    button-secondary-hover: #868e96,
+    button-outline-bg: #2d3236,
+    button-outline-text: #adb5bd,
+    button-outline-border: #495057,
+    button-outline-hover: #495057
+  )
+);

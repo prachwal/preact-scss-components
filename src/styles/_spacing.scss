@@ -1,0 +1,48 @@
+@use "sass:map";
+
+// Spacing scale - comprehensive scale for consistent spacing
+$spacing-scale: (
+  xs: 0.25rem,    // 4px
+  sm: 0.5rem,     // 8px
+  md: 1rem,       // 16px
+  lg: 1.5rem,     // 24px
+  xl: 2rem,       // 32px
+  2xl: 3rem,      // 48px
+  3xl: 4rem,      // 64px
+  4xl: 6rem,      // 96px
+  5xl: 8rem,      // 128px
+  6xl: 12rem      // 192px
+);
+
+// Legacy spacing map (for backward compatibility)
+$spacing: (
+  small: map.get($spacing-scale, sm),
+  medium: map.get($spacing-scale, md),
+  large: map.get($spacing-scale, lg),
+  xl: map.get($spacing-scale, xl)
+);
+
+// Breakpoints - mobile first approach
+$breakpoints: (
+  xs: 0px,        // Extra small devices (phones, < 576px)
+  sm: 576px,      // Small devices (phones, 576px and up)
+  md: 768px,      // Medium devices (tablets, 768px and up)
+  lg: 992px,      // Large devices (desktops, 992px and up)
+  xl: 1200px,     // Extra large devices (large desktops, 1200px and up)
+  2xl: 1400px     // Extra extra large devices (larger desktops, 1400px and up)
+);
+
+// Border radius scale
+$border-radius-scale: (
+  none: 0,
+  sm: 0.125rem,   // 2px
+  md: 0.25rem,    // 4px
+  lg: 0.375rem,   // 6px
+  xl: 0.5rem,     // 8px
+  2xl: 0.75rem,   // 12px
+  3xl: 1rem,      // 16px
+  full: 9999px    // Fully rounded
+);
+
+// Default border radius
+$border-radius: map.get($border-radius-scale, md);

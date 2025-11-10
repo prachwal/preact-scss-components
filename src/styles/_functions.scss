@@ -1,0 +1,87 @@
+@use "sass:map";
+@use "colors" as *;
+@use "spacing" as *;
+
+// SCSS functions for theme colors (recommended approach)
+/// Retrieves a color value from the theme colors map for the specified theme.
+/// @param {String} $key - The color key (e.g., 'primary', 'surface').
+/// @param {String} $theme - The theme name (default: 'light').
+/// @return {Color} The color value.
+@function theme-color($key, $theme: light) {
+  @return map.get(map.get($colors, $theme), $key);
+}
+
+/// Retrieves a spacing value from the spacing map.
+/// @param {String} $key - The spacing key (e.g., 'sm', 'md').
+/// @return {Length} The spacing value.
+@function spacing($key) {
+  @return map.get($spacing, $key);
+}
+
+/// Retrieves a value from the spacing scale map.
+/// @param {String} $key - The spacing scale key.
+/// @return {Length} The spacing scale value.
+@function spacing-scale($key) {
+  @return map.get($spacing-scale, $key);
+}
+
+/// Retrieves a breakpoint value from the breakpoints map.
+/// @param {String} $key - The breakpoint key (e.g., 'mobile', 'desktop').
+/// @return {Length} The breakpoint value.
+@function breakpoint($key) {
+  @return map.get($breakpoints, $key);
+}
+
+/// Retrieves a border radius value from the border radius scale map.
+/// @param {String} $key - The border radius key (default: 'md').
+/// @return {Length} The border radius value.
+@function border-radius($key: md) {
+  @return map.get($border-radius-scale, $key);
+}
+
+// Utility functions
+/// Returns a contrasting color (black or white) based on the lightness of the input color.
+/// @param {Color} $color - The input color.
+/// @param {Color} $dark - The dark color to return (default: black).
+/// @param {Color} $light - The light color to return (default: white).
+/// @return {Color} The contrasting color.
+@function color-contrast($color, $dark: #000000, $light: #ffffff) {
+  @if (lightness($color) > 50) {
+    @return $dark;
+  } @else {
+    @return $light;
+  }
+}
+
+/// Converts a hex color to rgba with optional alpha transparency.
+/// @param {Color} $hex - The hex color value.
+/// @param {Number} $alpha - The alpha value (default: 1).
+/// @return {Color} The rgba color.
+@function rgba-from-hex($hex, $alpha: 1) {
+  @return rgba(red($hex), green($hex), blue($hex), $alpha);
+}
+
+// Mixins for generating CSS custom properties
+/// Generates CSS custom properties for colors of a given theme.
+/// @param {String} $theme - The theme name (default: 'light').
+@mixin generate-color-properties($theme: light) {
+  $theme-colors: map.get($colors, $theme);
+
+  @each $key, $value in $theme-colors {
+    --color-#{"" + $key}: #{$value};
+  }
+}
+
+/// Generates CSS custom properties for spacing values.
+@mixin generate-spacing-properties() {
+  @each $key, $value in $spacing-scale {
+    --spacing-#{$key}: #{$value};
+  }
+}
+
+/// Generates CSS custom properties for border radius values.
+@mixin generate-border-radius-properties() {
+  @each $key, $value in $border-radius-scale {
+    --border-radius-#{$key}: #{$value};
+  }
+}

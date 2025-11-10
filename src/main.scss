@@ -1,0 +1,65 @@
+@use "styles/variables" as *;
+
+// App container
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-sizing: border-box;
+
+  @media (min-width: 576px) {
+    padding: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
+}
+
+// Main application styles
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+
+  &__title {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+  }
+
+  &__theme-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+.app-main {
+  flex: 1;
+}

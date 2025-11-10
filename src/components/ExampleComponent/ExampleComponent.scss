@@ -1,0 +1,83 @@
+@use "sass:map";
+@use "@styles/_variables" as *;
+
+.example-component {
+  padding: spacing(large);
+  border: 1px solid var(--color-border);
+  border-radius: $border-radius;
+  background-color: var(--color-surface);
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
+
+  &__title {
+    margin: 0 0 spacing(medium) 0;
+    font-size: spacing(large);
+    color: inherit; // Dziedziczy kolor z rodzica - dostosowuje się do motywu
+  }
+
+  &__actions {
+    display: flex;
+    gap: spacing(medium);
+    margin-bottom: spacing(medium);
+    flex-wrap: wrap;
+  }
+
+  &__button {
+    padding: spacing(sm) spacing(medium);
+    border: 1px solid var(--color-border);
+    border-radius: $border-radius;
+    background-color: var(--color-button-outline-bg);
+    color: var(--color-button-outline-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+
+    &:hover {
+      border-color: var(--color-primary);
+      background-color: var(--color-button-outline-hover);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    &--primary {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      border-color: var(--color-primary);
+
+      &:hover {
+        background-color: var(--color-primary-600);
+        border-color: var(--color-primary-600);
+      }
+    }
+
+    &--secondary {
+      background-color: var(--color-button-secondary-bg);
+      color: var(--color-button-secondary-text);
+      border-color: var(--color-border);
+
+      &:hover {
+        background-color: var(--color-surface-secondary);
+        border-color: var(--color-border-hover);
+      }
+    }
+  }
+
+  &__description {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+}

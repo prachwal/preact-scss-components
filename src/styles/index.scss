@@ -1,0 +1,101 @@
+@use "variables" as *;
+
+// Global styles
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+
+  // Set semantic colors for light theme
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+
+  // Responsive font sizes
+  @media (max-width: 575px) {
+    font-size: 14px;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+// Global responsive utilities
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @media (min-width: 576px) {
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
+}
+
+// Responsive grid system
+.grid {
+  display: grid;
+  gap: 1rem;
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// Responsive text utilities
+.text-responsive {
+  font-size: clamp(0.875rem, 2.5vw, 1.125rem);
+
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
+  }
+}
+
+// Hide/show utilities
+.hidden-mobile {
+  @media (max-width: 575px) {
+    display: none !important;
+  }
+}
+
+.hidden-tablet {
+  @media (min-width: 576px) and (max-width: 767px) {
+    display: none !important;
+  }
+}
+
+.hidden-desktop {
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+}
+
+// Focus and accessibility
+*:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

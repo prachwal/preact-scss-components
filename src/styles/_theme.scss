@@ -1,0 +1,15 @@
+@use "functions";
+
+// Generate CSS custom properties for themes
+
+// Light theme (default)
+:root {
+  @include functions.generate-color-properties(light);
+  @include functions.generate-spacing-properties();
+  @include functions.generate-border-radius-properties();
+}
+
+// Dark theme - applied to html element
+html[data-theme="dark"] {
+  @include functions.generate-color-properties(dark);
+}
