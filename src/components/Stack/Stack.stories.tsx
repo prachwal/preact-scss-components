@@ -241,3 +241,101 @@ export const CardListExample: Story = {
     </Stack>
   ),
 };
+
+export const AllSpacingSizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      {['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'].map((spacing) => (
+        <div key={spacing}>
+          <h4 style={{ marginBottom: '0.5rem' }}>{spacing.toUpperCase()} spacing</h4>
+          <Stack direction="row" spacing={spacing as any}>
+            <div style={{ padding: '0.5rem', backgroundColor: 'var(--psc-color-primary)', color: 'white' }}>A</div>
+            <div style={{ padding: '0.5rem', backgroundColor: 'var(--psc-color-secondary)', color: 'white' }}>B</div>
+            <div style={{ padding: '0.5rem', backgroundColor: 'var(--psc-color-success)', color: 'white' }}>C</div>
+          </Stack>
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+export const NumericSpacing: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      {[4, 8, 16, 24, 32].map((spacing) => (
+        <div key={spacing}>
+          <h4 style={{ marginBottom: '0.5rem' }}>{spacing}px spacing</h4>
+          <Stack direction="row" spacing={spacing}>
+            <div style={{ padding: '0.5rem', backgroundColor: 'var(--psc-color-info)', color: 'white' }}>A</div>
+            <div style={{ padding: '0.5rem', backgroundColor: 'var(--psc-color-warning)', color: 'black' }}>B</div>
+            <div style={{ padding: '0.5rem', backgroundColor: 'var(--psc-color-error)', color: 'white' }}>C</div>
+          </Stack>
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+export const SemanticHTMLTags: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      <div>
+        <h4>As Section</h4>
+        <Stack as="section" direction="row" spacing="md">
+          <div style={{ padding: '1rem', backgroundColor: 'var(--psc-color-surface-secondary)', border: '1px solid var(--psc-color-border)' }}>
+            Section Item 1
+          </div>
+          <div style={{ padding: '1rem', backgroundColor: 'var(--psc-color-surface-secondary)', border: '1px solid var(--psc-color-border)' }}>
+            Section Item 2
+          </div>
+        </Stack>
+      </div>
+
+      <div>
+        <h4>As Article</h4>
+        <Stack as="article" direction="row" spacing="md">
+          <div style={{ padding: '1rem', backgroundColor: 'var(--psc-color-surface-secondary)', border: '1px solid var(--psc-color-border)' }}>
+            Article Item 1
+          </div>
+          <div style={{ padding: '1rem', backgroundColor: 'var(--psc-color-surface-secondary)', border: '1px solid var(--psc-color-border)' }}>
+            Article Item 2
+          </div>
+        </Stack>
+      </div>
+    </div>
+  ),
+};
+
+export const AllAlignmentOptions: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      {['flex-start', 'center', 'flex-end', 'stretch', 'baseline'].map((alignment) => (
+        <div key={alignment}>
+          <h4>{alignment}</h4>
+          <Stack direction="row" spacing="md" alignItems={alignment as any} style={{ height: '120px', border: '1px solid var(--psc-color-border)', padding: '0.5rem' }}>
+            <div style={{ padding: '0.5rem', backgroundColor: 'var(--psc-color-primary)', color: 'white' }}>Short</div>
+            <div style={{ padding: '2rem 0.5rem', backgroundColor: 'var(--psc-color-secondary)', color: 'white' }}>Tall</div>
+            <div style={{ padding: '0.5rem', backgroundColor: 'var(--psc-color-success)', color: 'white' }}>Short</div>
+          </Stack>
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+export const AllJustifyContentOptions: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      {['flex-start', 'center', 'flex-end', 'space-between', 'space-around', 'space-evenly'].map((justify) => (
+        <div key={justify}>
+          <h4>{justify}</h4>
+          <Stack direction="row" spacing="md" justifyContent={justify as any} style={{ border: '1px solid var(--psc-color-border)', padding: '1rem' }}>
+            <div style={{ padding: '0.5rem', backgroundColor: 'var(--psc-color-info)', color: 'white', width: '80px' }}>A</div>
+            <div style={{ padding: '0.5rem', backgroundColor: 'var(--psc-color-warning)', color: 'black', width: '80px' }}>B</div>
+            <div style={{ padding: '0.5rem', backgroundColor: 'var(--psc-color-error)', color: 'white', width: '80px' }}>C</div>
+          </Stack>
+        </div>
+      ))}
+    </div>
+  ),
+};
