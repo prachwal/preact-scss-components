@@ -150,8 +150,29 @@ describe('Theme Initialization Functions', () => {
       }
       ;(matchMedia as any).mockReturnValue(mockMediaQuery)
 
-      // This should not throw
-      expect(() => setupSystemThemeListener(signal as any)).not.toThrow()
+      // This should not throw and should return a no-op cleanup function
+      const cleanup = setupSystemThemeListener(signal as any)
+      expect(typeof cleanup).toBe('function')
+      expect(() => cleanup()).not.toThrow()
+    })
+
+    it('handles matchMedia errors gracefully', () => {
+      const signal = { value: 'light' }
+      const mockMatchMedia = vi.fn(() => {
+        throw new Error('matchMedia error')
+      })
+      vi.stubGlobal('matchMedia', mockMatchMedia)
+
+      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+      // This should not throw and should return a no-op cleanup function
+      const cleanup = setupSystemThemeListener(signal as any)
+      expect(typeof cleanup).toBe('function')
+      expect(() => cleanup()).not.toThrow()
+
+      expect(consoleWarnSpy).toHaveBeenCalledWith('Failed to set up system theme listener:', expect.any(Error))
+
+      consoleWarnSpy.mockRestore()
     })
   })
 })

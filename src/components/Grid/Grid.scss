@@ -1,0 +1,157 @@
+@use "@styles/_variables" as *;
+
+// Grid system variables
+$grid-columns: 12 !default;
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+// Mixin to generate grid breakpoint classes (poprawka: pojedynczy -, prefix xs dla base)
+@mixin generate-grid-breakpoint-classes($suffix) {
+  // Auto sizing
+  .grid--#{$suffix}-auto {
+    flex-basis: auto;
+    flex-grow: 0;
+    max-width: none;
+  }
+
+  // Full width
+  .grid--#{$suffix}-true {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  // Specific column spans
+  @for $i from 1 through $grid-columns {
+    .grid--#{$suffix}-#{$i} {
+      flex-basis: calc(#{$i} / #{$grid-columns} * 100%);
+      flex-grow: 0;
+      max-width: calc(#{$i} / #{$grid-columns} * 100%);
+    }
+  }
+}
+
+.grid {
+  box-sizing: border-box;
+
+  // Container behavior (podstawowe style)
+  &--container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+    flex-direction: row;
+  }
+
+  // Item behavior
+  &--item {
+    box-sizing: border-box;
+    margin: 0;
+
+    // Zero min width (dopasowane do TSX)
+    &--zero-min-width {
+      min-width: 0;
+    }
+
+    // Focus styles for accessibility
+    &:focus {
+      outline: 2px solid var(--psc-color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  // Spacing system for containers (poprawka: spłaszczone, bez --container)
+  @for $i from 0 through 10 {
+    &--spacing-#{$i} {
+      margin: calc(var(--psc-spacing-sm) * #{-$i} / 2);
+
+      .grid--item {
+        padding: calc(var(--psc-spacing-sm) * #{$i} / 2);
+      }
+    }
+  }
+
+  // Container variants (przeniesione poza nesting, dla match z TSX: --container--...)
+  &--container--direction-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  &--container--direction-column {
+    flex-direction: column;
+  }
+
+  &--container--direction-column-reverse {
+    flex-direction: column-reverse;
+  }
+
+  &--container--justify-start {
+    justify-content: flex-start;
+  }
+
+  &--container--justify-center {
+    justify-content: center;
+  }
+
+  &--container--justify-end {
+    justify-content: flex-end;
+  }
+
+  &--container--justify-between {
+    justify-content: space-between;
+  }
+
+  &--container--justify-around {
+    justify-content: space-around;
+  }
+
+  &--container--justify-evenly {
+    justify-content: space-evenly;
+  }
+
+  &--container--align-start {
+    align-items: flex-start;
+  }
+
+  &--container--align-center {
+    align-items: center;
+  }
+
+  &--container--align-end {
+    align-items: flex-end;
+  }
+
+  &--container--align-stretch {
+    align-items: stretch;
+  }
+
+  &--container--align-baseline {
+    align-items: baseline;
+  }
+
+  &--container--wrap-nowrap {
+    flex-wrap: nowrap;
+  }
+
+  &--container--wrap-wrap-reverse {
+    flex-wrap: wrap-reverse;
+  }
+}
+
+// Generate breakpoint classes (poprawka: $suffix = $breakpoint, bez media dla xs, pojedynczy -)
+@each $breakpoint, $min-width in $grid-breakpoints {
+  $suffix: $breakpoint;
+
+  @if $min-width == 0 {
+    // xs: no media query
+    @include generate-grid-breakpoint-classes($suffix);
+  } @else {
+    @media (min-width: $min-width) {
+      @include generate-grid-breakpoint-classes($suffix);
+    }
+  }
+}

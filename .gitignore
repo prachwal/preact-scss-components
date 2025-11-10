@@ -143,3 +143,4 @@ merged-*.txt
 
 # Hugo files
 html/
+coverage_output.txt

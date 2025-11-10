@@ -77,6 +77,7 @@ export function setupSystemThemeListener(systemThemeSignal: ReturnType<typeof si
     };
   } catch (error) {
     console.warn('Failed to set up system theme listener:', error);
-    return () => {}; // Return no-op cleanup on error
+    const cleanup = function () {};
+    return cleanup; // Return no-op cleanup on error
   }
 }

@@ -82,11 +82,71 @@
   color: var(--psc-color-text-primary);
   text-align: center;
   transition: all 0.2s ease;
+  font-weight: 500;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   &:hover {
     border-color: var(--psc-color-primary);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
   }
+}
+
+// Color variants for demo items
+.demo-item--primary {
+  background-color: var(--psc-color-primary);
+  color: var(--psc-color-white);
+  border-color: var(--psc-color-primary);
+}
+
+.demo-item--secondary {
+  background-color: var(--psc-color-secondary);
+  color: var(--psc-color-white);
+  border-color: var(--psc-color-secondary);
+}
+
+.demo-item--success {
+  background-color: var(--psc-color-success);
+  color: var(--psc-color-white);
+  border-color: var(--psc-color-success);
+}
+
+.demo-item--warning {
+  background-color: var(--psc-color-warning);
+  color: var(--psc-color-black);
+  border-color: var(--psc-color-warning);
+}
+
+.demo-item--error {
+  background-color: var(--psc-color-error);
+  color: var(--psc-color-white);
+  border-color: var(--psc-color-error);
+}
+
+.demo-item--info {
+  background-color: var(--psc-color-info);
+  color: var(--psc-color-white);
+  border-color: var(--psc-color-info);
+}
+
+.demo-item--surface-secondary {
+  background-color: var(--psc-color-surface-secondary);
+  border-color: var(--psc-color-border-hover);
+}
+
+.demo-item--large {
+  padding: 1.5rem;
+  min-height: 80px;
+  font-size: 1.1rem;
+}
+
+.demo-item--small {
+  padding: 0.75rem;
+  min-height: 50px;
+  font-size: 0.9rem;
 }
 
 .demo-flex {

@@ -38,42 +38,6 @@ body {
   }
 }
 
-// Global responsive utilities
-.app-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-
-  @media (min-width: 576px) {
-    padding: 0 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    padding: 0 2rem;
-  }
-}
-
-// Responsive grid system
-.grid {
-  display: grid;
-  gap: 1rem;
-
-  @media (min-width: 576px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-
-  @media (min-width: 992px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 // Responsive text utilities
 .text-responsive {
   font-size: clamp(0.875rem, 2.5vw, 1.125rem);
